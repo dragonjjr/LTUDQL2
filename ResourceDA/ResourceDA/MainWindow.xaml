@@ -1,0 +1,416 @@
+﻿<Window x:Class="ResourceDA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ResourceDA"
+        mc:Ignorable="d"
+        Title="" Height="800" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!--#region -->
+        <local:ErrorToBoolConverter x:Key="ErrorC"></local:ErrorToBoolConverter>
+        <local:LengthToBoolConverter x:Key="LengthC"></local:LengthToBoolConverter>
+        <local:VisibilityConverter x:Key="VisC"></local:VisibilityConverter>
+        <!--#endregion-->
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+        </Style>
+        <!--#region btn sáng lên khi mouse over -->
+        <Style TargetType="Button" x:Key="btn">
+            <Setter Property="Background" Value="#FFE71515"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="35"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFF0303"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
+
+        <!--#region btn sáng lên nhưng ko có cornerRadius-->
+        <Style TargetType="Button" x:Key="btnNoCornerRadius">
+            <Setter Property="Background" Value="#FFE71515"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="35"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFFF0303"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
+        
+        <!--#region btn ko sáng lên khi muose over-->
+        <Style TargetType="Button" x:Key="btnSignInMin">
+            <Setter Property="Background" Value="#FFEE0E0E"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+
+
+        <!--#region này set màu cho button-->
+        <Style TargetType="Button" x:Key="btnSignInMax">
+            <Setter Property="Background" Value="#FFEE0E0E"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        <!--#endregion-->
+
+
+        <!--#region này set một vài thuộc tính cho textblock -->
+        <Style TargetType="TextBlock" x:Key="txtblock">
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#FFBCB3B3"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="TextDecorations" Value=""></Setter>
+        </Style>
+        <!--#endregion-->
+
+        <!--#region  PlaceHolder-->
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="Gray"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" 
+                                     Padding="5"
+                                     FontSize="14">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Gray"></Setter>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                                <Setter Property="Foreground" Value="Black"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Setter Property="FontSize" Value="14"></Setter>
+                                        <Setter Property="Padding" Value="5"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="18" FontWeight="Bold">*</TextBlock>
+                            <Border BorderThickness="1" BorderBrush="Red">
+                                <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}">
+                    </Setter>
+                </Trigger>
+
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="Background" Value="White"></Setter>
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+        <!--#endregion -->
+
+        <!--#region tắt viền màu xanh khi mouse over-->
+        <Style x:Key="btnOffBorder" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--#region bật button khi dủ các validation-->
+        <Style x:Key="btnbinding" TargetType="Button">
+            <Setter Property="Background" Value="#FF4E5154"></Setter>
+            <Setter Property="Foreground" Value="Gray"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="IsEnabled" Value="False"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Text.Length, ElementName=txtEmail, Converter={StaticResource LengthC},UpdateSourceTrigger=PropertyChanged}" Value="True"></Condition>
+                        <Condition Binding="{Binding Path=Text.Length, ElementName=txtPassword, Converter={StaticResource LengthC},UpdateSourceTrigger=PropertyChanged}" Value="True"></Condition>
+                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtEmail,Converter={StaticResource ErrorC}}" Value="False"></Condition>
+                        <Condition Binding="{Binding Path=(Validation.HasError),ElementName=txtPassword, Converter={StaticResource ErrorC}}"  Value="False"></Condition>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Background" Value="Red"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="IsEnabled" Value="True"></Setter>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
+    </Window.Resources>
+
+    <Grid>
+        <Grid Background="Black" x:Name="GridLoad" Visibility="Visible">
+
+            <Image Source="/images/download.png"  VerticalAlignment="Center" Margin="220" HorizontalAlignment="Center">
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard BeginTime="0:0:1" Duration="0:0:3">
+                                <DoubleAnimation  From="1" To="0" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridLoad" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+         
+        </Grid>
+
+
+        <Grid x:Name="GridMain" Visibility="{Binding ElementName=GridLoad,Path=Visibility,Converter={StaticResource VisC}}">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel>
+                <Image DockPanel.Dock="Left" Margin="15,0,5,5" Source="/images/netflix.png" MaxWidth="100" MaxHeight="50"></Image>
+                <Button  x:Name="btnShowSignIn" Click="btnShowSignIn_Click" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="5,5,15,5" Height="40" Width="90" Style="{StaticResource btnSignInMin}" >Sign in</Button>
+            </DockPanel>
+            <Grid Grid.Row="1" x:Name="GridMainHome" Visibility="Visible">
+                <Button Name="btnGetStarted" Height="85" Width="260" Style="{StaticResource btn}" Click="btnGetStarted_Click">Get Started ></Button>
+            </Grid>
+            
+            
+            <Grid Grid.Row="1" x:Name="GridMainStep1" Visibility="Collapsed"  VerticalAlignment="Top" Margin="0,120,0,0" HorizontalAlignment="Center">
+                <StackPanel>
+                    <Canvas Height="50" Width="50">
+                        <Ellipse
+                            Width="45"
+                            Height="45"
+                            Stroke="#FFE52E2E"
+                            StrokeThickness="2"/>
+                        <Line  
+                            X1="12" Y1="25"  
+                            X2="21" Y2="33"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="4" />
+                        <Line  
+                            X1="20" Y1="34"  
+                            X2="35" Y2="15"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="4" />
+                    </Canvas>
+
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">STEP <Bold>1</Bold> OF <Bold>3</Bold></TextBlock>
+
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"><Bold>Choose your plan.</Bold></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Canvas Height="50" Width="40">
+                            <Line  
+                            X1="12" Y1="25"  
+                            X2="21" Y2="33"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                            <Line  
+                            X1="21" Y1="34"  
+                            X2="35" Y2="15"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                        </Canvas>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">No commitments, cancel anytime.</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Canvas Height="50" Width="40">
+                            <Line  
+                            X1="12" Y1="25"  
+                            X2="21" Y2="33"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                            <Line  
+                            X1="21" Y1="34"  
+                            X2="35" Y2="15"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                        </Canvas>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap">Everything on Netflix for one low price.</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Canvas Height="50" Width="40">
+                            <Line  
+                            X1="12" Y1="25"  
+                            X2="21" Y2="33"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                            <Line  
+                            X1="21" Y1="34"  
+                            X2="35" Y2="15"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                        </Canvas>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap">Unlimited viewing on all your devices.</TextBlock>
+                    </StackPanel>
+                <Button Name="btnSeethePlans" Grid.Row="6" Grid.ColumnSpan="2" Height="50" Width="320" FontSize="16" FontWeight="Bold" Style="{StaticResource btnNoCornerRadius}" Click="btnSeethePlans_Click">See the Plans</Button>
+                </StackPanel>
+                
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="GridDangKy" Visibility="Collapsed">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                </Grid.ColumnDefinitions>
+                <local:TextBoxWithPlaceHolder Grid.Row="0" Margin="0 10 0 0" PlaceHolder="Email" x:Name="txtEmailDangKy"></local:TextBoxWithPlaceHolder>
+                <local:TextBoxWithPlaceHolder Grid.Row="1" Margin="0 10 0 0" PlaceHolder="Add a password" IsPassword="True" x:Name="txtPassDangKy"></local:TextBoxWithPlaceHolder>
+                <Button Name="btnContinue" Grid.Row="2" Style="{StaticResource btnNoCornerRadius}" Height="60" Margin="0 10 0 0" FontSize="16" Click="btnContinue_Click">Continue</Button>
+            </Grid>
+        </Grid>
+
+
+
+
+        <Grid x:Name="GridPhu" Visibility="Collapsed" Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <Button Style="{StaticResource btnOffBorder}" Margin="5" Name="btnBack" Click="btnBack_Click" Width="50" Height="50"  Background="Black" VerticalAlignment="Top">
+                    <Image Source="/images/backicon.jpg"></Image>
+                </Button>
+                <Image Margin="5" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top"  Source="/images/blacknetflix.png" MaxWidth="100" MaxHeight="50"></Image>
+            </DockPanel>
+            <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox Name="txtEmail" PreviewKeyDown="txtEmail_PreviewKeyDown" Margin="10" Grid.Row="0" Height="30" Width="270" Style="{StaticResource placeHolder}"  Tag="Email">
+                    <TextBox.Text>
+                        <Binding Path="Email">
+                            <Binding.ValidationRules>
+                                <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Email không đúng định dạng"></local:MyValidationRule>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="txtPassword" PreviewKeyDown="txtPassword_PreviewKeyDown" Margin="10" Grid.Row="1" Height="30" Width="270" Style="{StaticResource placeHolder}" Tag="Password" TabIndex="1">
+                    <TextBox.Text>
+                        <Binding Path="Password">
+                            <Binding.ValidationRules>
+                                <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Email không đúng định dạng"></local:MyValidationRule>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Button Name="btnSignIn"  Click="btnSignIn_Click" Margin="9" Grid.Row="2" Height="35" Width="275" Style="{StaticResource btnbinding}">Sign in</Button>
+                <TextBlock Grid.Row="3" Margin="0,15,0,0" Style="{StaticResource txtblock}">
+                    <Hyperlink Foreground="#FF9C9292" TextDecorations="">
+                        Forgot Your Password?
+                    </Hyperlink></TextBlock>
+                <Border Grid.Row="4"  Margin="0,15,0,0" Width="270" BorderBrush="#FF9C9292" BorderThickness="1"></Border>
+                <TextBlock Grid.Row="5" Margin="0,15,0,0" Style="{StaticResource txtblock}">
+                    <Hyperlink Foreground="#FF9C9292" TextDecorations="" Click="btnBack_Click">Create an Account</Hyperlink>
+                </TextBlock>
+                
+            </Grid>
+        </Grid>
+    </Grid>
+
+</Window>
