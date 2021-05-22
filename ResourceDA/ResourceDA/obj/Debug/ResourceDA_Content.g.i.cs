@@ -8,10 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/americanexpress.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/arrow.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/back.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/backicon.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/blacknetflix.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/download.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mastercard.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/netflix.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/security.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/step2.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/visa.png")]
 
 

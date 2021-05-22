@@ -49,7 +49,6 @@
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="35"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
-
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -63,11 +62,12 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FFFF0303"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
         <!--#endregion-->
-        
+
         <!--#region btn ko sáng lên khi muose over-->
         <Style TargetType="Button" x:Key="btnSignInMin">
             <Setter Property="Background" Value="#FFEE0E0E"></Setter>
@@ -162,7 +162,7 @@
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
                             <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="18" FontWeight="Bold">*</TextBlock>
-                            <Border BorderThickness="1" BorderBrush="Red">
+                            <Border BorderThickness="2" BorderBrush="Red">
                                 <AdornedElementPlaceholder></AdornedElementPlaceholder>
                             </Border>
                         </DockPanel>
@@ -231,6 +231,98 @@
             </Style.Triggers>
         </Style>
         <!--#endregion-->
+
+
+        <!--#region thẻ chọn level-->
+        <Style TargetType="{x:Type Button}" x:Key="btnlevel">
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Height" Value="150"></Setter>
+            <Setter Property="Width" Value="140"></Setter>
+            <Setter Property="Background" Value="#FFF16F6F"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Canvas Background="{TemplateBinding Background}">
+
+                            <Rectangle
+                                    Fill="White"
+                                             Width="145"
+                                             Height="15" Canvas.Top="145" Canvas.Left="-2.5">
+
+                            </Rectangle>
+                            <ContentPresenter Canvas.Top="60" Canvas.Left="30"></ContentPresenter>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Canvas Background="#FFCE0707">
+                                    <Rectangle
+                                    Fill="White"
+                                             Width="145"
+                                             Height="15" Canvas.Top="145" Canvas.Left="-2.5">
+
+                                    </Rectangle>
+                                    <Polygon Points="0,0 0,50 50,50"
+                                           Fill="#FFCE0707">
+
+                                        <Polygon.RenderTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="-45"/>
+                                                <TranslateTransform X="35" Y="120"/>
+                                            </TransformGroup>
+                                        </Polygon.RenderTransform>
+                                    </Polygon>
+                                    <ContentPresenter Canvas.Top="60" Canvas.Left="30"></ContentPresenter>
+                                </Canvas>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--#region control template cho btn mở grid thêm thông tin thanh toán -->
+        <ControlTemplate TargetType="Button" x:Key="btnPayment">
+            <Border CornerRadius="5" BorderBrush="#a3a3a4" BorderThickness="2" Background="{TemplateBinding Background}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.RowSpan="2" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left">Credit or Debit Card</TextBlock>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Image  Source="/images/visa.png" HorizontalAlignment="Left" VerticalAlignment="Center" MaxHeight="30" MaxWidth="60"></Image>
+                        <Image Margin="10 0" Source="/images/mastercard.png" HorizontalAlignment="Left" VerticalAlignment="Center" MaxHeight="30" MaxWidth="60"></Image>
+                    </StackPanel>
+                    <Image Grid.Column="1" Grid.Row="1"  Source="/images/americanexpress.png" HorizontalAlignment="Left" VerticalAlignment="Stretch" MaxHeight="50" MaxWidth="150"></Image>
+                    <Image Grid.RowSpan="2" Grid.Column="2" Source="/images/arrow.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" MaxHeight="50" MaxWidth="60"></Image>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <!--#endregion-->
     </Window.Resources>
 
     <Grid>
@@ -250,7 +342,7 @@
                     </EventTrigger>
                 </Image.Triggers>
             </Image>
-         
+
         </Grid>
 
 
@@ -263,12 +355,12 @@
                 <Image DockPanel.Dock="Left" Margin="15,0,5,5" Source="/images/netflix.png" MaxWidth="100" MaxHeight="50"></Image>
                 <Button  x:Name="btnShowSignIn" Click="btnShowSignIn_Click" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="5,5,15,5" Height="40" Width="90" Style="{StaticResource btnSignInMin}" >Sign in</Button>
             </DockPanel>
-            <Grid Grid.Row="1" x:Name="GridMainHome" Visibility="Visible">
+            <Grid  x:Name="GridMainHome" Grid.Row="1" Visibility="Visible">
                 <Button Name="btnGetStarted" Height="85" Width="260" Style="{StaticResource btn}" Click="btnGetStarted_Click">Get Started ></Button>
             </Grid>
-            
-            
-            <Grid Grid.Row="1" x:Name="GridMainStep1" Visibility="Collapsed"  VerticalAlignment="Top" Margin="0,120,0,0" HorizontalAlignment="Center">
+
+
+            <Grid  x:Name="GridMainStep1" Grid.Row="1" Visibility="Collapsed"  VerticalAlignment="Top" Margin="0,120,0,0" HorizontalAlignment="Center">
                 <StackPanel>
                     <Canvas Height="50" Width="50">
                         <Ellipse
@@ -336,25 +428,216 @@
                         </Canvas>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap">Unlimited viewing on all your devices.</TextBlock>
                     </StackPanel>
-                <Button Name="btnSeethePlans" Grid.Row="6" Grid.ColumnSpan="2" Height="50" Width="320" FontSize="16" FontWeight="Bold" Style="{StaticResource btnNoCornerRadius}" Click="btnSeethePlans_Click">See the Plans</Button>
+                    <Button Name="btnSeethePlans" Grid.Row="6" Grid.ColumnSpan="2" Height="50" Width="320" FontSize="16" FontWeight="Bold" Style="{StaticResource btnNoCornerRadius}" Click="btnSeethePlans_Click">See the Plans</Button>
                 </StackPanel>
-                
+
             </Grid>
+
+            <Grid x:Name="GridMainStep1Countinue" Grid.Row="1" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="480"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0"  Margin="30 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="52"/>
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" FontSize="18" VerticalAlignment="Top" Foreground="Black" HorizontalAlignment="Left">STEP <Bold>1</Bold> OF <Bold>3</Bold></TextBlock>
+                    <TextBlock Grid.Row="1" FontSize="24" VerticalAlignment="Center"><Bold>Choose the plan that’s right for you</Bold></TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" VerticalAlignment="Bottom">
+                    <Button Name="btnBasis" Click="btnBasis_Click" Style="{DynamicResource btnlevel}" Margin="0,0,0,10" Content="   Basis"></Button>
+                </Grid>
+                <Grid Grid.Column="2" VerticalAlignment="Bottom">
+                    <Button Name="btnPremium" Click="btnBasis_Click" Style="{DynamicResource btnlevel}" Margin="0,0,0,10">Premium</Button>
+                </Grid>
+                <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="480"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0">Monthly price</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">180,000 đ</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">230,000 đ</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" Margin="30,0"></Border>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0">Unlimited video</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <Canvas Height="50" Width="40">
+                            <Line  
+                            X1="0" Y1="12"  
+                            X2="20" Y2="35"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2"/>
+
+                            <Line  
+                            X1="0" Y1="35"  
+                            X2="20" Y2="10"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2"/>
+                        </Canvas>
+                    </Grid>
+                    <Grid Grid.Row="2" Grid.Column="2">
+                        <Canvas Height="50" Width="40">
+                            <Line  
+                            X1="12" Y1="25"  
+                            X2="21" Y2="33"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                            <Line  
+                            X1="21" Y1="34"  
+                            X2="35" Y2="15"  
+                            Stroke="#FFE52E2E"  
+                            StrokeThickness="2" />
+                        </Canvas>
+                    </Grid>
+                    <Grid Grid.Row="3" Grid.ColumnSpan="3">
+                        <Button Name="btnStep1Continue" VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" FontSize="20" Width="380" Style="{StaticResource btnNoCornerRadius}" Click="btnStep1Continue_Click">Continue</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+
+
+            <Grid x:Name="GridMainStep2"  Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,90">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="/images/Step2.jpg" ></Image>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Step <Bold>1</Bold> OF <Bold>3</Bold></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold">Finish setting up your account.</TextBlock>
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Netflix is personalized for you. Create<LineBreak></LineBreak>a password to watch Netflix on any<LineBreak></LineBreak>device at any time.</TextBlock>
+                <Button Name="btnStep2" Grid.Row="4" Style="{StaticResource btnNoCornerRadius}" Margin="0,20" Height="60" FontSize="20" Click="btnStep2_Click">Continue</Button>
+            </Grid>
+
+
+
+
+
+            <Grid x:Name="GridMainStep3" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="/images/security.png" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">STEP <Bold>3</Bold> OF <Bold>3</Bold></TextBlock>
+                <TextBlock Grid.Row="2" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"> Set up your payment.</TextBlock>
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Your membership starts as</TextBlock>
+                <TextBlock Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-10,0,0">soon as you set up</TextBlock>
+                <TextBlock Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-2,0,0">payment.</TextBlock>
+                <TextBlock Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" >No commitments.</TextBlock>
+                <TextBlock Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"  Margin="0,-10,0,0">Cancel online anytime.</TextBlock>
+                <Button Cursor="Hand" Name="btnMoGridMainThanhToan" Grid.Row="8"  Margin="0,30"  Height="100" Width="450"  Template="{StaticResource btnPayment}" Click="btnMoGridMainThanhToan_Click" Background="Transparent"></Button>
+            </Grid>
+
+
+
+            <Grid x:Name="GridThongTinThe" Grid.Row="1"  Visibility="Collapsed" Margin="0,0,0,90" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,0,0">STEP <Bold>3</Bold> OF <Bold>3</Bold></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="10,0,0,10" FontSize="22" FontWeight="Bold">Set up your credit or debit card.</TextBlock>
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Height="30">
+                    <Image Source="/images/visa.png" Margin="10,0,0,0"></Image>
+                    <Image Source="/images/mastercard.png" Margin="10,0,0,0"></Image>
+                    <Image Source="/images/americanexpress.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" ></Image>
+                </StackPanel>
+                <local:TextBoxWithPlaceHolder x:Name="txtThongTinFirstName" Margin="0,10,0,0" Grid.Row="3" Grid.Column="1" PlaceHolder="First Name" IsFirstName="True"></local:TextBoxWithPlaceHolder>
+
+                <local:TextBoxWithPlaceHolder x:Name="txtThongTinLastName" Margin="0,10,0,0" Grid.Row="4" Grid.Column="1" PlaceHolder="Last Name" IsLastName="True"></local:TextBoxWithPlaceHolder>
+
+                <local:TextBoxWithPlaceHolder x:Name="txtThongTinCardNumber" Margin="0,10,0,0" Grid.Row="5" Grid.Column="1" PlaceHolder="Card Number" IsCardNumber="True"></local:TextBoxWithPlaceHolder>
+
+                <local:TextBoxWithPlaceHolder x:Name="txtThongTinExpiration" Margin="0,10,0,0" Grid.Row="6" Grid.Column="1" PlaceHolder="Expiration Date (MM/YY)" IsExpirationDate="True"></local:TextBoxWithPlaceHolder>
+
+                <local:TextBoxWithPlaceHolder x:Name="txtThongTinSecurityCode" Margin="0,10,0,0" Grid.Row="7" Grid.Column="1" PlaceHolder="Security Code (CVV)" IsSecurityCode="True"></local:TextBoxWithPlaceHolder>
+
+                <Button Name="btnStartMember" Grid.Column="1"  Grid.Row="8"  Margin="0,10,0,0"  Style="{StaticResource btnNoCornerRadius}" FontSize="18" Height="60">Start Membership</Button>
+            </Grid>
+
+
+
+
+
+
+
+
+
+
         </Grid>
 
-        <Grid x:Name="GridDangKy" Visibility="Collapsed">
+
+
+
+        <Grid x:Name="GridDangKy" Visibility="Collapsed" Margin="0,0,0,90">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="380"/>
                 </Grid.ColumnDefinitions>
-                <local:TextBoxWithPlaceHolder Grid.Row="0" Margin="0 10 0 0" PlaceHolder="Email" x:Name="txtEmailDangKy"></local:TextBoxWithPlaceHolder>
-                <local:TextBoxWithPlaceHolder Grid.Row="1" Margin="0 10 0 0" PlaceHolder="Add a password" IsPassword="True" x:Name="txtPassDangKy"></local:TextBoxWithPlaceHolder>
-                <Button Name="btnContinue" Grid.Row="2" Style="{StaticResource btnNoCornerRadius}" Height="60" Margin="0 10 0 0" FontSize="16" Click="btnContinue_Click">Continue</Button>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">STEP <Bold>2</Bold> OF <Bold>3</Bold></TextBlock>
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"><Bold>Create a password to start your <LineBreak></LineBreak>membership.</Bold></TextBlock>
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">Just a few more steps and you're done!<LineBreak></LineBreak>We hate paperwork, too.</TextBlock>
+                <local:TextBoxWithPlaceHolder Grid.Row="3" Margin="0 10 0 0" PlaceHolder="Email" x:Name="txtEmailDangKy"  IsEmail="True"></local:TextBoxWithPlaceHolder>
+                <local:TextBoxWithPlaceHolder Grid.Row="4" Margin="0 10 0 0" PlaceHolder="Add a password" IsPassword="True" x:Name="txtPassDangKy"></local:TextBoxWithPlaceHolder>
+                <Button Name="btnContinue" Grid.Row="5" Style="{StaticResource btnNoCornerRadius}" Height="60" Margin="0 10 0 0" FontSize="16" Click="btnContinue_Click">Continue</Button>
             </Grid>
         </Grid>
 
@@ -408,7 +691,7 @@
                 <TextBlock Grid.Row="5" Margin="0,15,0,0" Style="{StaticResource txtblock}">
                     <Hyperlink Foreground="#FF9C9292" TextDecorations="" Click="btnBack_Click">Create an Account</Hyperlink>
                 </TextBlock>
-                
+
             </Grid>
         </Grid>
     </Grid>

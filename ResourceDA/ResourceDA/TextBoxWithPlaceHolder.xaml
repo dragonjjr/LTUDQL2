@@ -8,6 +8,7 @@
             MinWidth="300"
              x:Name="_this">
     <UserControl.Resources>
+
         <Style x:Key="credentialTxtTitleStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Text" Value="{Binding PlaceHolder,ElementName=_this}"></Setter>
             <Setter Property="HorizontalAlignment" Value="Left"></Setter>
@@ -42,7 +43,7 @@
             <Setter Property="Text" Value="{Binding Text,ElementName=email,Mode=TwoWay}"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="TextAlignment" Value="Left"></Setter>
-            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+
             <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Validation.ErrorTemplate">
@@ -56,6 +57,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
             <Style.Triggers>
                 <DataTrigger Binding="{Binding FontSize,ElementName=title}" Value="15">
                     <DataTrigger.EnterActions>
@@ -78,12 +80,91 @@
                 </DataTrigger>
 
 
+                <DataTrigger Binding="{Binding IsFirstName, ElementName=_this,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="FirstName sai"></local:MyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+
+                <DataTrigger Binding="{Binding IsLastName, ElementName=_this,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="LastName sai"></local:MyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+
+                <DataTrigger Binding="{Binding IsCardNumber, ElementName=_this,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <Binding Path="CardNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Card Number sai"></local:MyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding IsExpirationDate, ElementName=_this,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <Binding Path="ExpirationDate" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Expiration sai"></local:MyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding IsSecurityCode, ElementName=_this,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <Binding Path="SecurityCode" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Security code sai"></local:MyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding IsEmail, ElementName=_this,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Email không đúng dịnh dạng"></local:MyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
 
                 <DataTrigger Binding="{Binding Text,Mode=TwoWay,ElementName=_this}" Value="">
                     <Setter Property="Text" Value="{Binding Password,ElementName=passbox}"></Setter>
                 </DataTrigger>
 
-    
+
                 <DataTrigger Binding="{Binding Visibility,ElementName=passbox}" Value="Visible">
                     <Setter Property="Visibility" Value="Collapsed"></Setter>
                 </DataTrigger>
@@ -93,7 +174,7 @@
                     </Setter>
                 </Trigger>
 
-              
+
             </Style.Triggers>
         </Style>
 
@@ -135,8 +216,6 @@
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
                 </DataTrigger>
-
-   
                 <DataTrigger Binding="{Binding IsPassword,ElementName=_this}" Value="False">
                     <Setter Property="Visibility" Value="Collapsed"></Setter>
                 </DataTrigger>
@@ -174,6 +253,7 @@
                             <DataTrigger Binding="{Binding IsPassword,ElementName=_this}" Value="False">
                                 <Setter Property="Visibility" Value="Collapsed"></Setter>
                             </DataTrigger>
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -185,13 +265,15 @@
             <Setter Property="BorderThickness" Value="1"></Setter>
             <Setter Property="CornerRadius" Value="0"></Setter>
             <Setter Property="BorderBrush" Value="#a3a3a4"></Setter>
-            <Setter Property="Height" Value="60"></Setter>
+            <Setter Property="Height" Value="70"></Setter>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=(Validation.HasError),ElementName=email,UpdateSourceTrigger=PropertyChanged}" Value="True">
                     <Setter Property="BorderBrush" Value="Red"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=(Validation.HasError),ElementName=passbox,UpdateSourceTrigger=PropertyChanged}" Value="True">
                     <Setter Property="BorderBrush" Value="Red"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -209,14 +291,6 @@
 
                 <TextBox x:Name="email"
                      Style="{StaticResource credentialTBTitleStyle}">
-                    <TextBox.Text>
-                        <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <local:MyValidationRule RegexText="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMsg="Email không đúng định dạng"></local:MyValidationRule>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text> 
-
                 </TextBox>
 
 
