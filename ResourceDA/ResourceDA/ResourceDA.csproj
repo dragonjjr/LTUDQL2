@@ -178,7 +178,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Converter\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="images\americanexpress.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

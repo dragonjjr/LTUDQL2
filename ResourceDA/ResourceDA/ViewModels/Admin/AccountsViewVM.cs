@@ -42,7 +42,7 @@ namespace ResourceDA.ViewModels.Admin
 
             using (QLMEDIAEntities qLMEDIA = new QLMEDIAEntities())
             {
-                DSAccount = new ListCollectionView(qLMEDIA.Accounts.ToList());
+                DSAccount = new ListCollectionView(qLMEDIA.Accounts.Where(acc => acc.ModuleAccount == "0").ToList());
                 DSAccount.CurrentChanged += (obj, e) =>
                 {
                     var accountCur = DSAccount.CurrentItem as Account;
@@ -52,7 +52,11 @@ namespace ResourceDA.ViewModels.Admin
                         UserName = accountCur.UserName,
                         Image = accountCur.Image,
                         PhoneNumber = accountCur.PhoneNumber,
-                        Address = accountCur.Address
+                        Address = accountCur.Address,
+                        Password =accountCur.Password,
+                        LevelAccount = accountCur.LevelAccount,
+                        CreditCardNumber= accountCur.CreditCardNumber,
+                        TaxCode = accountCur.TaxCode
                     };
                 };
             }

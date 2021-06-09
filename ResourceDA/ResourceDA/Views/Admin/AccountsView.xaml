@@ -7,42 +7,84 @@
         mc:Ignorable="d"
         Title="AccountsView" Height="450" Width="800">
     <Grid>
-         
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        
+
         <ListView Name="LvHocSinh" Grid.Column="0" ItemsSource="{Binding DSAccount}"
                       SelectionMode="Single" IsSynchronizedWithCurrentItem="True"
                       >
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <UniformGrid Columns="1">
+                                <TextBlock Text="{Binding UserName}"/>
+                                <!--<TextBlock Text="{Binding Image}"/>-->
+                                <!--<Image Source="{Binding Image}" >
+                                </Image>-->
+                                <TextBlock Text="{Binding Address}"/>
+                            </UniformGrid>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding Path=UserName}" />
-                    <GridViewColumn Header="Image"  DisplayMemberBinding="{Binding Path=Image}" />
+                    <!--<GridViewColumn Header="Image" Width="200" DisplayMemberBinding="{Binding Path=Image}" />-->
                     <GridViewColumn Header="PhoneNumber" Width="120" DisplayMemberBinding="{Binding Path=PhoneNumber}" />
-                    <GridViewColumn Header="Address" Width="120" DisplayMemberBinding="{Binding Path=Address}" />
+                    <GridViewColumn Header="Address" Width="Auto" DisplayMemberBinding="{Binding Path=Address}" />
                 </GridView>
             </ListView.View>
         </ListView>
 
         <StackPanel Margin="2" Grid.Column="1" HorizontalAlignment="Center">
-            <TextBlock > User Name:</TextBlock>
-            <TextBox Text="{Binding Account.UserName}" Margin="3" Width="200"/>
-            <TextBlock >Image:</TextBlock>
-            <TextBox Text="{Binding Account.Image}" Margin="3" Width="200"/>
-            <TextBlock >PhoneNumber:</TextBlock>
-            <TextBox Text="{Binding Account.PhoneNumber}" Margin="3" Width="200"/>
-            <TextBlock >Address :</TextBlock>
-            <TextBox Text="{Binding Account.Address}" Margin="3" Width="200"/>
-            <Button Margin="3" Width="50" Command="{Binding CmdUpdateAccount}">Update</Button>
-            <!--<Border BorderThickness="5" Margin="10" Padding="5" >
+            <TabControl Width="Auto">
+                <TabItem Header="Update or Delete">
+                    <StackPanel>
+                        <TextBlock > User Name:</TextBlock>
+                        <TextBox Text="{Binding Account.UserName}" Margin="3" Width="200"/>
+                        <TextBlock > Password :</TextBlock>
+                        <TextBox Text="{Binding Account.Password}" Margin="3" Width="200"/>
+                        <TextBlock > LevelAccount :</TextBlock>
+                        <TextBox Text="{Binding Account.LevelAccount}" Margin="3" Width="200"/>
+                        <TextBlock > CreditCardNumber :</TextBlock>
+                        <TextBox Text="{Binding Account.CreditCardNumber}" Margin="3" Width="200"/>
+                        <TextBlock > TaxCode :</TextBlock>
+                        <TextBox Text="{Binding Account.TaxCode}" Margin="3" Width="200"/>
+                        <!--<TextBlock >Image:</TextBlock>
+            -->
+                        <!--<TextBox Text="{Binding Account.Image}" Margin="3" Width="200"/>-->
+                        <!--
+            <Image Source="{Binding Account.Image}" ></Image>-->
+                        <TextBlock >PhoneNumber:</TextBlock>
+                        <TextBox Text="{Binding Account.PhoneNumber}" Margin="3" Width="200"/>
+                        <TextBlock >Address :</TextBlock>
+                        <TextBox Text="{Binding Account.Address}" Margin="3" Width="200"
+                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                        <WrapPanel HorizontalAlignment="Center">
+                            <Button Margin="10" Width="50" Command="{Binding CmdUpdateAccount}">Update</Button>
+                            <Button Margin="10" Width="50" Command="{Binding CmdUpdateAccount}">Delete</Button>
+                        </WrapPanel>
+                        <!--<Border BorderThickness="5" Margin="10" Padding="5" >
                 <StackPanel >
                     <TextBlock >Chọn lớp cho học sinh:</TextBlock>
                     <ComboBox Margin="5" Name="cbLopHocAdd" ItemsSource="{Binding DSLopHocAdd}" Width="70" DisplayMemberPath="TenLopHoc" ></ComboBox>
                     <Button Margin="3" Width="50" Command="{Binding CmdAddHocSinh}">Add</Button>
                 </StackPanel>
             </Border>-->
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Update or Delete">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+            
         </StackPanel>
     </Grid>
 </Window>
