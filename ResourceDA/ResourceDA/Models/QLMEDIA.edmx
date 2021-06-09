@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLMEDIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="ModuleAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="LevelAccount" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreditCardNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxCode" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="KindOfVideo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ListMediaLike">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="IdProfile" />
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="IdProfile" Type="int" Nullable="false" />
+          <Property Name="IdMedia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListMediaView">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="IdProfile" />
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="IdProfile" Type="int" Nullable="false" />
+          <Property Name="IdMedia" Type="int" Nullable="false" />
+          <Property Name="Views" Type="int" />
+          <Property Name="CompleteTime" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Describe" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Directors" Type="nchar" MaxLength="10" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="PostedDate" Type="datetime" />
+          <Property Name="TypeMedia" Type="int" />
+          <Property Name="Actor" Type="nvarchar(max)" />
+          <Property Name="IMDB" Type="float" />
+          <Property Name="FileFormat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Likes" Type="int" />
+          <Property Name="Genre" Type="int" />
+        </EntityType>
+        <EntityType Name="MyPlayList">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="IdProfile" />
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="IdProfile" Type="int" Nullable="false" />
+          <Property Name="IdMedia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Money" Type="float" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <EntityType Name="TypeMedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="QLMEDIAModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KindOfVideo" EntityType="Self.KindOfVideo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListMediaLike" EntityType="Self.ListMediaLike" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListMediaView" EntityType="Self.ListMediaView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyPlayList" EntityType="Self.MyPlayList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentHistory" EntityType="Self.PaymentHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeMedia" EntityType="Self.TypeMedia" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLMEDIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LevelAccount" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreditCardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="KindOfVideo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListMediaLike">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="IdProfile" />
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="IdProfile" Type="Int32" Nullable="false" />
+          <Property Name="IdMedia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListMediaView">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="IdProfile" />
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="IdProfile" Type="Int32" Nullable="false" />
+          <Property Name="IdMedia" Type="Int32" Nullable="false" />
+          <Property Name="Views" Type="Int32" />
+          <Property Name="CompleteTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Medium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Describe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Directors" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostedDate" Type="DateTime" Precision="3" />
+          <Property Name="TypeMedia" Type="Int32" />
+          <Property Name="Actor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMDB" Type="Double" />
+          <Property Name="FileFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Likes" Type="Int32" />
+          <Property Name="Genre" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MyPlayList">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+            <PropertyRef Name="IdProfile" />
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="IdProfile" Type="Int32" Nullable="false" />
+          <Property Name="IdMedia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Money" Type="Double" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TypeMedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="QLMEDIAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="KindOfVideos" EntityType="Self.KindOfVideo" />
+          <EntitySet Name="ListMediaLikes" EntityType="Self.ListMediaLike" />
+          <EntitySet Name="ListMediaViews" EntityType="Self.ListMediaView" />
+          <EntitySet Name="Media" EntityType="Self.Medium" />
+          <EntitySet Name="MyPlayLists" EntityType="Self.MyPlayList" />
+          <EntitySet Name="PaymentHistories" EntityType="Self.PaymentHistory" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="TypeMedias" EntityType="Self.TypeMedia" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLMEDIAModelStoreContainer" CdmEntityContainer="QLMEDIAEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="QLMEDIAModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ModuleAccount" ColumnName="ModuleAccount" />
+                <ScalarProperty Name="LevelAccount" ColumnName="LevelAccount" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CreditCardNumber" ColumnName="CreditCardNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KindOfVideos">
+            <EntityTypeMapping TypeName="QLMEDIAModel.KindOfVideo">
+              <MappingFragment StoreEntitySet="KindOfVideo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListMediaLikes">
+            <EntityTypeMapping TypeName="QLMEDIAModel.ListMediaLike">
+              <MappingFragment StoreEntitySet="ListMediaLike">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdProfile" ColumnName="IdProfile" />
+                <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListMediaViews">
+            <EntityTypeMapping TypeName="QLMEDIAModel.ListMediaView">
+              <MappingFragment StoreEntitySet="ListMediaView">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdProfile" ColumnName="IdProfile" />
+                <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="CompleteTime" ColumnName="CompleteTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Media">
+            <EntityTypeMapping TypeName="QLMEDIAModel.Medium">
+              <MappingFragment StoreEntitySet="Media">
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Directors" ColumnName="Directors" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+                <ScalarProperty Name="TypeMedia" ColumnName="TypeMedia" />
+                <ScalarProperty Name="Actor" ColumnName="Actor" />
+                <ScalarProperty Name="IMDB" ColumnName="IMDB" />
+                <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyPlayLists">
+            <EntityTypeMapping TypeName="QLMEDIAModel.MyPlayList">
+              <MappingFragment StoreEntitySet="MyPlayList">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdProfile" ColumnName="IdProfile" />
+                <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentHistories">
+            <EntityTypeMapping TypeName="QLMEDIAModel.PaymentHistory">
+              <MappingFragment StoreEntitySet="PaymentHistory">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="QLMEDIAModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeMedias">
+            <EntityTypeMapping TypeName="QLMEDIAModel.TypeMedia">
+              <MappingFragment StoreEntitySet="TypeMedia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
