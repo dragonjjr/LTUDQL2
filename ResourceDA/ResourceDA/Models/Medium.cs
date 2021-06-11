@@ -11,20 +11,166 @@ namespace ResourceDA.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Medium
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    public partial class Medium : INotifyPropertyChanged
     {
-        public string Describe { get; set; }
+        string _Describe, _Time, _Directors, _Source, _Actor, _FileFormat, _Name;
+        int _TypeMedia, _Likes, _Genre;
+        double _IMDB;
+        System.DateTime _PostedDate;
+        public string Describe
+        {
+            get => _Describe;
+            set
+            {
+                if (_Describe != value)
+                {
+                    _Describe = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public int Id { get; set; }
-        public string Time { get; set; }
-        public string Directors { get; set; }
-        public string Source { get; set; }
-        public Nullable<System.DateTime> PostedDate { get; set; }
-        public Nullable<int> TypeMedia { get; set; }
-        public string Actor { get; set; }
-        public Nullable<double> IMDB { get; set; }
-        public string FileFormat { get; set; }
-        public Nullable<int> Likes { get; set; }
-        public Nullable<int> Genre { get; set; }
+        public string Time
+        {
+            get => _Time;
+            set
+            {
+                if (_Time != value)
+                {
+                    _Time = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Directors
+        {
+            get => _Directors;
+            set
+            {
+                if (_Directors != value)
+                {
+                    _Directors = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Source
+        {
+            get => _Source;
+            set
+            {
+                if (_Source != value)
+                {
+                    _Source = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public Nullable<System.DateTime> PostedDate
+        {
+            get => _PostedDate;
+            set
+            {
+                if (_PostedDate != value)
+                {
+                    _PostedDate = (System.DateTime)value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public Nullable<int> TypeMedia
+        {
+            get => _TypeMedia;
+            set
+            {
+                if (_TypeMedia != value)
+                {
+                    _TypeMedia = (int)value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Actor
+        {
+            get => _Actor;
+            set
+            {
+                if (_Actor != value)
+                {
+                    _Actor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public Nullable<double> IMDB
+        {
+            get => _IMDB;
+            set
+            {
+                if (_IMDB != value)
+                {
+                    _IMDB = (double)value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string FileFormat
+        {
+            get => _FileFormat;
+            set
+            {
+                if (_FileFormat != value)
+                {
+                    _FileFormat = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public Nullable<int> Likes
+        {
+            get => _Likes;
+            set
+            {
+                if (_Likes != value)
+                {
+                    _Likes = (int)value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public Nullable<int> Genre
+        {
+            get => _Genre;
+            set
+            {
+                if (_Genre != value)
+                {
+                    _Genre = (int)value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Name
+        {
+            get => _Name;
+            set
+            {
+                if (_Name != value)
+                {
+                    _Name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

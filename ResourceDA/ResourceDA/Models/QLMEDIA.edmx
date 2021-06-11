@@ -53,10 +53,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Describe" Type="nvarchar" MaxLength="50" />
+          <Property Name="Describe" Type="nvarchar(max)" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Time" Type="nvarchar" MaxLength="50" />
-          <Property Name="Directors" Type="nchar" MaxLength="10" />
+          <Property Name="Directors" Type="nchar" MaxLength="50" />
           <Property Name="Source" Type="nvarchar(max)" />
           <Property Name="PostedDate" Type="datetime" />
           <Property Name="TypeMedia" Type="int" />
@@ -65,6 +65,7 @@
           <Property Name="FileFormat" Type="nvarchar" MaxLength="50" />
           <Property Name="Likes" Type="int" />
           <Property Name="Genre" Type="int" />
+          <Property Name="Name" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="MyPlayList">
           <Key>
@@ -165,10 +166,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Describe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Directors" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Directors" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PostedDate" Type="DateTime" Precision="3" />
           <Property Name="TypeMedia" Type="Int32" />
@@ -177,6 +178,7 @@
           <Property Name="FileFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Likes" Type="Int32" />
           <Property Name="Genre" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="MyPlayList">
           <Key>
@@ -289,6 +291,7 @@
                 <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
                 <ScalarProperty Name="Likes" ColumnName="Likes" />
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

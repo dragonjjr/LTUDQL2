@@ -18,7 +18,7 @@ namespace ResourceDA.Models
     {
 
 
-        string _UserName, _Password, _Image, _ModuleAccount, _PhoneNumber, _CreditCardNumber, _Address,_TaxCode;
+        string _UserName, _Password, _Image, _ModuleAccount, _PhoneNumber, _CreditCardNumber, _Address, _TaxCode;
         int _LevelAccount;
         public int Id { get; set; }
         public string UserName
@@ -69,7 +69,8 @@ namespace ResourceDA.Models
                 }
             }
         }
-        public Nullable<int> LevelAccount {
+        public Nullable<int> LevelAccount
+        {
             get => _LevelAccount;
             set
             {
@@ -116,7 +117,8 @@ namespace ResourceDA.Models
                 }
             }
         }
-        public string TaxCode {
+        public string TaxCode
+        {
             get => _TaxCode;
             set
             {

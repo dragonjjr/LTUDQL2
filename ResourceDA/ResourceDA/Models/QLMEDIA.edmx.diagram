@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6f6ba6b48b8d4b129e40e0fad619d8ad" Name="Diagram1">
+      <Diagram DiagramId="56d6dfe9642244df8e04bf330e629e77" Name="Diagram1">
         <EntityTypeShape EntityType="QLMEDIAModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.KindOfVideo" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.ListMediaLike" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
