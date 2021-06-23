@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="56d6dfe9642244df8e04bf330e629e77" Name="Diagram1">
+      <Diagram DiagramId="2893d01ecce144ce9856d12e7439e350" Name="Diagram1">
         <EntityTypeShape EntityType="QLMEDIAModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.KindOfVideo" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.ListMediaLike" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="QLMEDIAModel.MyPlayList" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.PaymentHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.Profile" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLMEDIAModel.TypeMedia" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

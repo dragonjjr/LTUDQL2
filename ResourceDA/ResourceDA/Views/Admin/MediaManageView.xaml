@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceDA.Views.Admin"
         mc:Ignorable="d"
-        Title="MediaManageView" Height="600" Width="1000">
-    <Grid>
+        Title="MediaManageView"  WindowState="Maximized" ResizeMode="CanMinimize">
+    <Grid >
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Height="50"
                  FontSize="30"   Text="Management Media"/>
@@ -50,7 +50,7 @@
                     </StackPanel>
 
                     <ListView Name="lvMedia"  ItemsSource="{Binding DSMedia, Mode=TwoWay}"
-                              SelectionMode="Single" IsSynchronizedWithCurrentItem="True"
+                              SelectionMode="Single" IsSynchronizedWithCurrentItem="True" Height="550" Width="auto"
                               >
 
                         <ListView.ItemContainerStyle>
@@ -60,17 +60,28 @@
                                         <UniformGrid Columns="1">
                                             <TextBlock Text="{Binding Name}"/>
                                             <!--<TextBlock Text="{Binding Image}"/>-->
-                                            <!--<Image Source="{Binding Image}" >
-                                            </Image>-->
-                                            <TextBlock Text="{Binding Describe}"/>
-                                            <TextBlock Text="{Binding Time}"/>
-                                            <!--<TextBlock Text="LevelMedia:"/>-->
-                                            <TextBlock Text="{Binding Directors}"/>
-                                            <TextBlock Text="{Binding Source}"/>
-                                            <TextBlock Text="{Binding PostedDate}"/>
-                                            <TextBlock Text="{Binding TypeMedia}"/>
-                                            <TextBlock Text="{Binding Actor}"/>
-                                            <TextBlock Text="{Binding Genre}"/>
+                                            <!--<Image Source="{Binding Poster ,StringFormat=E:\\nam 3  hk2\\Ltudql\\do an\\do an 1\\LTUDQL2\\ResourceDA\\ResourceDA\\Assets\\image\\poster\\{0} }" />-->
+                                            <TextBlock Width="500" TextWrapping="Wrap">
+                                                <Run Text="Describe: "/>
+                                                <LineBreak/>
+                                                <Run  Text="{Binding Describe}"/>
+                                            </TextBlock>
+                                            <TextBlock >
+                                                <Run Text="Time: "/>
+                                                <Run Text="{Binding Time}"/>
+                                            </TextBlock>
+                                            <TextBlock >
+                                                <Run Text="Directors: "/>
+                                                <Run Text="{Binding Directors}"/>
+                                            </TextBlock>
+                                            <TextBlock >
+                                                <Run Text="PostedDate: "/>
+                                                <Run Text="{Binding PostedDate}"/>
+                                            </TextBlock>
+                                            <TextBlock  Width="500" TextWrapping="Wrap">
+                                                <Run Text="Actor: "/>
+                                                <Run Text="{Binding Actor}"/>
+                                            </TextBlock>
                                         </UniformGrid>
                                     </Setter.Value>
                                 </Setter>
@@ -89,34 +100,37 @@
                 </StackPanel>
 
                 <StackPanel Margin="2" Grid.Column="1" HorizontalAlignment="Center">
-                    <TabControl Width="Auto">
+                    <TabControl Width="auto" >
                         <TabItem Header="Update or Delete Media">
                             <StackPanel>
                                 <TextBlock >Name:</TextBlock>
-                                <TextBox Text="{Binding Media.Name}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding Media.Name}" Margin="3" Width="auto"/>
                                 <TextBlock > Actor :</TextBlock>
-                                <TextBox Text="{Binding Media.Actor}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding Media.Actor}" Margin="3" Width="auto"/>
                                 <TextBlock > Time :</TextBlock>
-                                <TextBox Text="{Binding Media.Time}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding Media.Time}" Margin="3" Width="auto"/>
                                 <TextBlock > Directors :</TextBlock>
-                                <TextBox Text="{Binding Media.Directors}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding Media.Directors}" Margin="3" Width="auto"/>
                                 <TextBlock > Source :</TextBlock>
-                                <TextBox Text="{Binding Media.Source}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding Media.Source}" Margin="3" Width="auto" TextWrapping="Wrap"/>
+                                <Button Margin="10" Width="50" Command="{Binding CmdBrowsSourceMedia}">Browse</Button>
+                                <TextBlock > Poster :</TextBlock>
+                                <TextBox Text="{Binding Media.Poster}" Margin="3" Width="auto" TextWrapping="Wrap"/>
+                                <Button Margin="10" Width="50" Command="{Binding CmdBrowsPosterMedia}">Browse</Button>
                                 <TextBlock > IMDB :</TextBlock>
-                                <TextBox Text="{Binding Media.IMDB}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding Media.IMDB}" Margin="3" Width="auto"/>
                                 <!--<TextBlock >Image:</TextBlock>
                 -->
                                 <!--<TextBox Text="{Binding Media.Image}" Margin="3" Width="200"/>-->
                                 <!--
                 <Image Source="{Binding Media.Image}" ></Image>-->
                                 <TextBlock>PostedDate:</TextBlock>
-                                <!--<TextBox Text="{Binding Media.PostedDate}" Margin="3" Width="200"/>-->
                                 <DatePicker Height="25" HorizontalAlignment="Left"
                                             SelectedDate="{Binding Media.PostedDate, Mode=TwoWay}"
                                             Margin="42,26,0,0" Name="datePicker1" VerticalAlignment="Top" Width="115"  />
                                 <TextBlock >Describe :</TextBlock>
-                                <TextBox Text="{Binding Media.Describe}" Margin="3" Width="200"
-                            TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                                <TextBox Text="{Binding Media.Describe}" Margin="3" Width="auto" Height="100"
+                            TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"  />
                                 <WrapPanel HorizontalAlignment="Center">
                                     <Button Margin="10" Width="50" Command="{Binding CmdUpdateMedia}" >Update</Button>
                                     <Button Margin="10" Width="50" Command="{Binding CmdDeleteMedia}">Delete</Button>
@@ -130,25 +144,34 @@
                     </StackPanel>
                 </Border>-->
                             </StackPanel>
-                        </TabItem>
+                        </TabItem >
                         <TabItem Header="Add Media">
                             <StackPanel>
                                 <TextBlock >Name:</TextBlock>
-                                <TextBox Text="{Binding MediaNew.Name}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding MediaNew.Name}" Margin="3" Width="auto"/>
                                 <TextBlock > Actor :</TextBlock>
-                                <TextBox Text="{Binding MediaNew.Actor}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding MediaNew.Actor}" Margin="3" Width="auto"/>
                                 <TextBlock > Time :</TextBlock>
-                                <TextBox Text="{Binding MediaNew.Time}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding MediaNew.Time}" Margin="3" Width="auto"/>
                                 <TextBlock > Directors :</TextBlock>
-                                <TextBox Text="{Binding MediaNew.Directors}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding MediaNew.Directors}" Margin="3" Width="auto"/>
+                                <!--<TextBlock > Source :</TextBlock>
+                                <TextBox Text="{Binding MediaNew.Source}" Margin="3" Width="200"/>-->
+                                <TextBlock > Poster :</TextBlock>
+                                <TextBox Text="{Binding MediaNew.Poster}" Margin="3" Width="auto" TextWrapping="Wrap"/>
+                                <Button Margin="10" Width="50" Command="{Binding CmdBrowsPosterMediaNew}">Browse</Button>
+
                                 <TextBlock > Source :</TextBlock>
-                                <TextBox Text="{Binding MediaNew.Source}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding MediaNew.Source}" Margin="3" Width="auto" TextWrapping="Wrap"/>
+                                <Button Margin="10" Width="50" Command="{Binding CmdBrowsSourceMediaNew}">Browse</Button>
+
+
                                 <TextBlock > IMDB :</TextBlock>
-                                <TextBox Text="{Binding MediaNew.IMDB}" Margin="3" Width="200"/>
+                                <TextBox Text="{Binding MediaNew.IMDB}" Margin="3" Width="auto"/>
                                 <Border BorderThickness="5" Margin="10" Padding="5" >
                                     <StackPanel >
                                         <TextBlock >Kind of media :</TextBlock>
-                                        <ComboBox Margin="5" Name="cmbKindofmediaAdd" ItemsSource="{Binding DSKindOfVideoAdd}" Width="100" DisplayMemberPath="Name" ></ComboBox>
+                                        <ComboBox Margin="5" Name="cmbKindofmediaAdd" ItemsSource="{Binding DSKindOfVideoAdd}" Width="auto" DisplayMemberPath="Name" ></ComboBox>
                                     </StackPanel>
                                 </Border>
                                 <!--<TextBlock >Image:</TextBlock>
@@ -164,7 +187,7 @@
                                             
                                             />
                                 <TextBlock >Describe :</TextBlock>
-                                <TextBox Text="{Binding MediaNew.Describe}" Margin="3" Width="200"
+                                <TextBox Text="{Binding MediaNew.Describe}" Margin="3" Width="auto"
                             TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
                                 <WrapPanel HorizontalAlignment="Center">
                                     <Button Margin="10" Width="50" Command="{Binding CmdAddMedia}">Add</Button>

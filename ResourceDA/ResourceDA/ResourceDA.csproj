@@ -113,9 +113,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLMEDIA.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\TypeMedia.cs">
-      <DependentUpon>QLMEDIA.tt</DependentUpon>
-    </Compile>
     <Compile Include="MyValidationRule.cs" />
     <Compile Include="PassWordBoxAssistant.cs" />
     <Compile Include="TextBoxWithPlaceHolder.xaml.cs">
@@ -198,6 +195,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\image\poster\" />
+    <Folder Include="Assets\video\" />
     <Folder Include="Converter\" />
   </ItemGroup>
   <ItemGroup>

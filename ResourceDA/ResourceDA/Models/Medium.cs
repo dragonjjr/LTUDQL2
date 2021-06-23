@@ -16,7 +16,7 @@ namespace ResourceDA.Models
 
     public partial class Medium : INotifyPropertyChanged
     {
-        string _Describe, _Time, _Directors, _Source, _Actor, _FileFormat, _Name;
+        string _Describe, _Time, _Directors, _Source, _Actor, _Name, _Poster;
         int _TypeMedia, _Likes, _Genre;
         double _IMDB;
         System.DateTime _PostedDate;
@@ -81,18 +81,6 @@ namespace ResourceDA.Models
                 }
             }
         }
-        public Nullable<int> TypeMedia
-        {
-            get => _TypeMedia;
-            set
-            {
-                if (_TypeMedia != value)
-                {
-                    _TypeMedia = (int)value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         public string Actor
         {
             get => _Actor;
@@ -113,18 +101,6 @@ namespace ResourceDA.Models
                 if (_IMDB != value)
                 {
                     _IMDB = (double)value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public string FileFormat
-        {
-            get => _FileFormat;
-            set
-            {
-                if (_FileFormat != value)
-                {
-                    _FileFormat = value;
                     OnPropertyChanged();
                 }
             }
@@ -161,6 +137,18 @@ namespace ResourceDA.Models
                 if (_Name != value)
                 {
                     _Name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Poster {
+            get => _Poster;
+            set
+            {
+                if (_Poster != value)
+                {
+                    _Poster = value;
                     OnPropertyChanged();
                 }
             }

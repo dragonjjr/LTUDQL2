@@ -59,13 +59,12 @@
           <Property Name="Directors" Type="nchar" MaxLength="50" />
           <Property Name="Source" Type="nvarchar(max)" />
           <Property Name="PostedDate" Type="datetime" />
-          <Property Name="TypeMedia" Type="int" />
           <Property Name="Actor" Type="nvarchar(max)" />
           <Property Name="IMDB" Type="float" />
-          <Property Name="FileFormat" Type="nvarchar" MaxLength="50" />
           <Property Name="Likes" Type="int" />
           <Property Name="Genre" Type="int" />
           <Property Name="Name" Type="nchar" MaxLength="100" />
+          <Property Name="Poster" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="MyPlayList">
           <Key>
@@ -95,13 +94,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Age" Type="int" />
         </EntityType>
-        <EntityType Name="TypeMedia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityContainer Name="QLMEDIAModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KindOfVideo" EntityType="Self.KindOfVideo" Schema="dbo" store:Type="Tables" />
@@ -111,7 +103,6 @@
           <EntitySet Name="MyPlayList" EntityType="Self.MyPlayList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentHistory" EntityType="Self.PaymentHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TypeMedia" EntityType="Self.TypeMedia" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -172,13 +163,12 @@
           <Property Name="Directors" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PostedDate" Type="DateTime" Precision="3" />
-          <Property Name="TypeMedia" Type="Int32" />
           <Property Name="Actor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IMDB" Type="Double" />
-          <Property Name="FileFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Likes" Type="Int32" />
           <Property Name="Genre" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Poster" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MyPlayList">
           <Key>
@@ -208,13 +198,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Age" Type="Int32" />
         </EntityType>
-        <EntityType Name="TypeMedia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="QLMEDIAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="KindOfVideos" EntityType="Self.KindOfVideo" />
@@ -224,7 +207,6 @@
           <EntitySet Name="MyPlayLists" EntityType="Self.MyPlayList" />
           <EntitySet Name="PaymentHistories" EntityType="Self.PaymentHistory" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
-          <EntitySet Name="TypeMedias" EntityType="Self.TypeMedia" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -285,13 +267,12 @@
                 <ScalarProperty Name="Directors" ColumnName="Directors" />
                 <ScalarProperty Name="Source" ColumnName="Source" />
                 <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
-                <ScalarProperty Name="TypeMedia" ColumnName="TypeMedia" />
                 <ScalarProperty Name="Actor" ColumnName="Actor" />
                 <ScalarProperty Name="IMDB" ColumnName="IMDB" />
-                <ScalarProperty Name="FileFormat" ColumnName="FileFormat" />
                 <ScalarProperty Name="Likes" ColumnName="Likes" />
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -321,14 +302,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TypeMedias">
-            <EntityTypeMapping TypeName="QLMEDIAModel.TypeMedia">
-              <MappingFragment StoreEntitySet="TypeMedia">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -33,6 +33,5 @@ namespace ResourceDA.Models
         public virtual DbSet<MyPlayList> MyPlayLists { get; set; }
         public virtual DbSet<PaymentHistory> PaymentHistories { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
-        public virtual DbSet<TypeMedia> TypeMedias { get; set; }
     }
 }
