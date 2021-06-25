@@ -36,6 +36,7 @@
           <Property Name="IdAccount" Type="int" Nullable="false" />
           <Property Name="IdProfile" Type="int" Nullable="false" />
           <Property Name="IdMedia" Type="int" Nullable="false" />
+          <Property Name="Datatime" Type="datetime" />
         </EntityType>
         <EntityType Name="ListMediaView">
           <Key>
@@ -63,7 +64,7 @@
           <Property Name="IMDB" Type="float" />
           <Property Name="Likes" Type="int" />
           <Property Name="Genre" Type="int" />
-          <Property Name="Name" Type="nchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Poster" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="MyPlayList">
@@ -140,6 +141,7 @@
           <Property Name="IdAccount" Type="Int32" Nullable="false" />
           <Property Name="IdProfile" Type="Int32" Nullable="false" />
           <Property Name="IdMedia" Type="Int32" Nullable="false" />
+          <Property Name="Datatime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ListMediaView">
           <Key>
@@ -167,7 +169,7 @@
           <Property Name="IMDB" Type="Double" />
           <Property Name="Likes" Type="Int32" />
           <Property Name="Genre" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Poster" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MyPlayList">
@@ -244,6 +246,7 @@
                 <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
                 <ScalarProperty Name="IdProfile" ColumnName="IdProfile" />
                 <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+                <ScalarProperty Name="Datatime" ColumnName="Datatime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

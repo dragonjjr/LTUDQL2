@@ -17,7 +17,7 @@ namespace ResourceDA.Models
     public partial class Medium : INotifyPropertyChanged
     {
         string _Describe, _Time, _Directors, _Source, _Actor, _Name, _Poster;
-        int _TypeMedia, _Likes, _Genre;
+        int _Likes, _Genre;
         double _IMDB;
         System.DateTime _PostedDate;
         public string Describe
@@ -142,7 +142,8 @@ namespace ResourceDA.Models
             }
         }
 
-        public string Poster {
+        public string Poster
+        {
             get => _Poster;
             set
             {

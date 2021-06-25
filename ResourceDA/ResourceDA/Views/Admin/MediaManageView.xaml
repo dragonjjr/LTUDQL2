@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceDA.Views.Admin"
         mc:Ignorable="d"
-        Title="MediaManageView"  WindowState="Maximized" ResizeMode="CanMinimize">
+        Title="MediaManageView"  WindowState="Maximized" ResizeMode="CanMinimize" Height="729.828">
     <Grid >
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Height="50"
@@ -97,6 +97,11 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+
+                    <StackPanel Orientation="Horizontal" Margin="20" HorizontalAlignment="Center">
+                        <Button Width="auto" Height="auto" Command="{Binding CmdShowImportMediaView}" >Import media</Button>
+
+                    </StackPanel>
                 </StackPanel>
 
                 <StackPanel Margin="2" Grid.Column="1" HorizontalAlignment="Center">
@@ -134,7 +139,6 @@
                                 <WrapPanel HorizontalAlignment="Center">
                                     <Button Margin="10" Width="50" Command="{Binding CmdUpdateMedia}" >Update</Button>
                                     <Button Margin="10" Width="50" Command="{Binding CmdDeleteMedia}">Delete</Button>
-                                    <Button Margin="10" Width="50" Command="{Binding CmdReMedia}">Reload</Button>
                                 </WrapPanel>
                                 <!--<Border BorderThickness="5" Margin="10" Padding="5" >
                     <StackPanel >

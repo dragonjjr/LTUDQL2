@@ -17,5 +17,6 @@ namespace ResourceDA.Models
         public int IdAccount { get; set; }
         public int IdProfile { get; set; }
         public int IdMedia { get; set; }
+        public Nullable<System.DateTime> Datatime { get; set; }
     }
 }

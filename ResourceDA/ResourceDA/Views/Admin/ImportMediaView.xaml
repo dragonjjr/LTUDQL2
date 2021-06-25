@@ -1,0 +1,87 @@
+﻿<Window x:Class="ResourceDA.Views.Admin.ImportMediaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ResourceDA.Views.Admin"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        
+        Title="ImportMediaView" WindowState="Maximized" ResizeMode="CanMinimize" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CmdMyICommandThatShouldHandleLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <MediaElement Source="{Binding  Media.Source}" Margin="20" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="auto" Height="auto" Margin="10"  Command="{Binding CmdBrowsMedia}">Brows Media</Button>
+                <Button Width="auto" Height="auto" Margin="10"  Content="Close">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="Close"
+                           TargetObject="{Binding RelativeSource={RelativeSource
+                                                  Mode=FindAncestor,
+                                                  AncestorType=Window}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+            
+            <TextBlock >Name:</TextBlock>
+            <TextBox Text="{Binding Media.Name}" Margin="3" Width="auto"/>
+            <TextBlock > Actor :</TextBlock>
+            <TextBox Text="{Binding Media.Actor}" Margin="3" Width="auto"/>
+            <TextBlock > Time :</TextBlock>
+            <TextBox Text="{Binding Media.Time}" Margin="3" Width="auto"/>
+            <TextBlock > Directors :</TextBlock>
+            <TextBox Text="{Binding Media.Directors}" Margin="3" Width="auto"/>
+            <!--<TextBlock > Source :</TextBlock>
+                                <TextBox Text="{Binding Media.Source}" Margin="3" Width="200"/>-->
+            <TextBlock > Poster :</TextBlock>
+            <TextBox Text="{Binding Media.Poster}" Margin="3" Width="auto" TextWrapping="Wrap"/>
+            <Button Margin="10" Width="50" Command="{Binding CmdBrowsPosterMedia}">Browse</Button>
+
+            
+
+
+            <TextBlock > IMDB :</TextBlock>
+            <TextBox Text="{Binding Media.IMDB}" Margin="3" Width="auto"/>
+            <Border BorderThickness="5" Margin="10" Padding="5" >
+                <StackPanel >
+                    <TextBlock >Kind of media :</TextBlock>
+                    <ComboBox Margin="5" Name="cmbKindofmediaAdd" ItemsSource="{Binding DSKindOfVideoAdd}" Width="auto" DisplayMemberPath="Name" ></ComboBox>
+                </StackPanel>
+            </Border>
+            <!--<TextBlock >Image:</TextBlock>
+                -->
+            <!--<TextBox Text="{Binding Media.Image}" Margin="3" Width="200"/>-->
+            <!--
+                <Image Source="{Binding Media.Image}" ></Image>-->
+            <TextBlock>PostedDate:</TextBlock>
+            <!--<TextBox Text="{Binding Media.PostedDate}" Margin="3" Width="200"/>-->
+            <DatePicker Height="25" HorizontalAlignment="Left"
+                                            SelectedDate="{Binding Media.PostedDate, Mode=TwoWay}"
+                                            Margin="42,26,0,0" VerticalAlignment="Top" Width="115"
+                                            
+                                            />
+            <TextBlock >Describe :</TextBlock>
+            <TextBox Text="{Binding Media.Describe}" Margin="3" Width="auto"
+                            TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Margin="10" Width="50" Command="{Binding CmdimportMedia}">Import</Button>
+            </WrapPanel>
+            
+        </StackPanel>
+
+    </Grid>
+</Window>

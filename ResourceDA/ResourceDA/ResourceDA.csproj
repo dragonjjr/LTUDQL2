@@ -45,12 +45,27 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaInfoDotNet, Version=0.7.79.40925, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediaInfoDotNet.0.7.79.40925\lib\net45\MediaInfoDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="MetadataExtractor, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetadataExtractor.2.0.0\lib\net45\MetadataExtractor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.DesignTools.Interaction, Version=16.9.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -65,6 +80,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="XmpCore, Version=5.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XmpCore.5.1.3\lib\net35\XmpCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -119,12 +137,20 @@
       <DependentUpon>TextBoxWithPlaceHolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Admin\AccountsViewVM.cs" />
+    <Compile Include="ViewModels\Admin\ImportMediaViewVM.cs" />
     <Compile Include="ViewModels\Admin\MediaManageViewVM.cs" />
+    <Compile Include="ViewModels\Admin\StatisticalChartMediaViewVM.cs" />
     <Compile Include="Views\Admin\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\ImportMediaView.xaml.cs">
+      <DependentUpon>ImportMediaView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\MediaManageView.xaml.cs">
       <DependentUpon>MediaManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\StatisticalChartMedia.xaml.cs">
+      <DependentUpon>StatisticalChartMedia.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisibilityConverter.cs" />
     <Compile Include="windownsCustom\MessTimeout.xaml.cs">
@@ -150,7 +176,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\ImportMediaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Admin\MediaManageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\StatisticalChartMedia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +212,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="MediaInfoDotNet.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <EntityDeploy Include="Models\QLMEDIA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLMEDIA.Designer.cs</LastGenOutput>
@@ -243,9 +280,18 @@
       <DependentUpon>QLMEDIA.edmx</DependentUpon>
       <LastGenOutput>QLMEDIA.cs</LastGenOutput>
     </Content>
+    <Content Include="x64\MediaInfo.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\MediaInfo.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

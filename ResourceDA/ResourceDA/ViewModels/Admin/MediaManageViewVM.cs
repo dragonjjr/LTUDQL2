@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using ResourceDA.Command;
 using ResourceDA.Models;
+using ResourceDA.Views.Admin;
 using ResourceDA.windownsCustom;
 using System;
 using System.Collections.Generic;
@@ -102,6 +103,7 @@ namespace ResourceDA.ViewModels.Admin
         public ICommand CmdAddMedia { get; }
         public ICommand CmdCriteriaKindOfMedia { get; }
         public ICommand CmdCriteriaMediaNone { get; }
+        public ICommand CmdShowImportMediaView { get; }
 
         public ICommand CmdBrowsSourceMedia { get; }
         public ICommand CmdBrowsSourceMediaNew { get; }
@@ -158,6 +160,7 @@ namespace ResourceDA.ViewModels.Admin
             CmdBrowsPosterMediaNew = new RelayCommand<object>(BrowsPosterMediaNew);
             CmdCriteriaKindOfMedia = new RelayCommandNoParameter(reloadKindOfMedia);
             CmdCriteriaMediaNone = new RelayCommandNoParameter(reloadMediaNone);
+            CmdShowImportMediaView = new RelayCommandNoParameter(ShowImportMediaView);
 
             try
             {
@@ -309,6 +312,11 @@ namespace ResourceDA.ViewModels.Admin
                 MessTimeout w = new MessTimeout(ex.Message, 3000);
                 w.ShowDialog();
             }
+        }
+
+        void ShowImportMediaView()
+        {
+            new ImportMediaView().ShowDialog();
         }
 
         void UpdateMedia(object obj)

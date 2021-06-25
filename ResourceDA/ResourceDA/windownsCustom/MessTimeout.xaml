@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MessTimeout" Height="148.007" Width="284.219" Loaded="Window_Loaded">
     <Grid>
-        <TextBox Name="txMess" Text="dsadsa" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+        <TextBox  TextWrapping="Wrap" Name="txMess" Text="dsadsa" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
     </Grid>
 </Window>
