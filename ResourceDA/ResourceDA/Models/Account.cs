@@ -74,7 +74,7 @@ namespace ResourceDA.Models
             get => _LevelAccount;
             set
             {
-                if (_LevelAccount != value)
+                if (_LevelAccount != value && value != null)
                 {
                     _LevelAccount = (int)value;
                     OnPropertyChanged();

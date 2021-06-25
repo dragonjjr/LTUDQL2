@@ -47,7 +47,7 @@ namespace ResourceDA.ViewModels.Admin
         {
             seriesCollectionProperty = DependencyProperty.Register("seriesCollection", typeof(SeriesCollection), typeof(StatisticalChartMediaViewVM));
             LabelsProperty = DependencyProperty.Register("Labels", typeof(string[]), typeof(StatisticalChartMediaViewVM));
-            DsKindOfMediaProperty = DependencyProperty.Register("DsKindOfMedia", typeof(ListCollectionView), typeof(MediaManageViewVM));
+            DsKindOfMediaProperty = DependencyProperty.Register("DsKindOfMediaa", typeof(ListCollectionView), typeof(MediaManageViewVM));
             // FormatterProperty = DependencyProperty.Register("Formatter", typeof(Func<double, string>), typeof(StatisticalChartMediaViewVM));
         }
 
@@ -316,7 +316,7 @@ namespace ResourceDA.ViewModels.Admin
             // Formatter = value => value.ToString();
         }
 
-        public ListCollectionView DsKindOfMedia
+        public ListCollectionView DsKindOfMediaa
         {
             get => (ListCollectionView)GetValue(DsKindOfMediaProperty);
             set => SetValue(DsKindOfMediaProperty, value);
@@ -350,13 +350,13 @@ namespace ResourceDA.ViewModels.Admin
             {
                 using (QLMEDIAEntities qLMEDIA = new QLMEDIAEntities())
                 {
-                    DsKindOfMedia = new ListCollectionView(qLMEDIA.KindOfVideos.ToList());
+                    DsKindOfMediaa = new ListCollectionView(qLMEDIA.KindOfVideos.ToList());
                     
                 }
 
-                DsKindOfMedia.CurrentChanged += (_, e) =>
+                DsKindOfMediaa.CurrentChanged += (_, e) =>
                 {
-                    var KindOfMediaCur = DsKindOfMedia.CurrentItem as KindOfVideo;
+                    var KindOfMediaCur = DsKindOfMediaa.CurrentItem as KindOfVideo;
                     KindOfVideo = new KindOfVideo
                     {
                         Id = KindOfMediaCur.Id,
@@ -384,9 +384,6 @@ namespace ResourceDA.ViewModels.Admin
                     
 
                 };
-
-                //// hehe load lại .
-                //DsKindOfMedia.Refresh();
 
                 
             }

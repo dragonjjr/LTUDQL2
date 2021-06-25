@@ -37,7 +37,7 @@
                                           SelectedItem="{Binding SelectedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Height="25" Width="100"
                                           />-->
-                            <ComboBox IsReadOnly = "True"  ItemsSource="{Binding DsKindOfMedia}" Width="100" DisplayMemberPath="Name" ></ComboBox>
+                            <ComboBox IsReadOnly = "True"  ItemsSource="{Binding DsKindOfMediaa}" Width="100" DisplayMemberPath="Name" ></ComboBox>
 
                             <Button Margin="0,0,30,0" Content="Month : " />
                             <ComboBox ItemsSource="{Binding ValuesMonth}"

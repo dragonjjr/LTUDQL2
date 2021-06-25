@@ -74,7 +74,7 @@ namespace ResourceDA.Models
             get => _PostedDate;
             set
             {
-                if (_PostedDate != value)
+                if (_PostedDate != value && value != null)
                 {
                     _PostedDate = (System.DateTime)value;
                     OnPropertyChanged();
@@ -98,7 +98,7 @@ namespace ResourceDA.Models
             get => _IMDB;
             set
             {
-                if (_IMDB != value)
+                if (_IMDB != value && value != null)
                 {
                     _IMDB = (double)value;
                     OnPropertyChanged();
@@ -110,7 +110,7 @@ namespace ResourceDA.Models
             get => _Likes;
             set
             {
-                if (_Likes != value)
+                if (_Likes != value && value != null)
                 {
                     _Likes = (int)value;
                     OnPropertyChanged();
@@ -122,7 +122,7 @@ namespace ResourceDA.Models
             get => _Genre;
             set
             {
-                if (_Genre != value)
+                if (_Genre != value && value != null)
                 {
                     _Genre = (int)value;
                     OnPropertyChanged();

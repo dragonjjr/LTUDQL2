@@ -137,11 +137,15 @@
       <DependentUpon>TextBoxWithPlaceHolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Admin\AccountsViewVM.cs" />
+    <Compile Include="ViewModels\Admin\DashboardViewVM.cs" />
     <Compile Include="ViewModels\Admin\ImportMediaViewVM.cs" />
     <Compile Include="ViewModels\Admin\MediaManageViewVM.cs" />
     <Compile Include="ViewModels\Admin\StatisticalChartMediaViewVM.cs" />
     <Compile Include="Views\Admin\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\ImportMediaView.xaml.cs">
       <DependentUpon>ImportMediaView.xaml</DependentUpon>
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

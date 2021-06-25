@@ -1,0 +1,14 @@
+﻿<Window x:Class="ResourceDA.Views.Admin.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ResourceDA.Views.Admin"
+        mc:Ignorable="d"
+        Title="DashboardView" Height="200" Width="400">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <Button Width="auto" Height="100" Margin="20"  Command="{Binding CmdManageAccounts}">Quản lý Tài khoản</Button>
+        <Button Width="auto" Height="100" Margin="20"  Command="{Binding CmdMediaManage}">Quản lý media</Button>
+        <Button Width="auto" Height="100" Margin="20"  Command="{Binding CmdStatisticalChartMedia}">Thống kê</Button>
+    </StackPanel>
+</Window>
