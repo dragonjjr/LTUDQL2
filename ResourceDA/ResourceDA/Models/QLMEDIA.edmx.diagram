@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="87bbcefa8cd64355a7877a20237ed5e3" Name="Diagram1">
+      <Diagram DiagramId="0a8795c0f3ce4346a313f2b1f76544a9" Name="Diagram1">
         <EntityTypeShape EntityType="QLMEDIAModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.KindOfVideo" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.ListMediaLike" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
@@ -13,6 +13,9 @@
         <EntityTypeShape EntityType="QLMEDIAModel.MyPlayList" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.PaymentHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLMEDIAModel.Profile" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLMEDIAModel.sysdiagram" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLMEDIAModel.Classify" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLMEDIAModel.Listclassify_Media" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

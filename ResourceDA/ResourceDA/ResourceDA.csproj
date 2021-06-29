@@ -95,7 +95,13 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>QLMEDIA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Classify.cs">
+      <DependentUpon>QLMEDIA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\KindOfVideo.cs">
+      <DependentUpon>QLMEDIA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Listclassify_Media.cs">
       <DependentUpon>QLMEDIA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListMediaLike.cs">
@@ -130,6 +136,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QLMEDIA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QLMEDIA.tt</DependentUpon>
     </Compile>
     <Compile Include="MyValidationRule.cs" />
     <Compile Include="PassWordBoxAssistant.cs" />

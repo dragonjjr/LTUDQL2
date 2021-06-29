@@ -20,12 +20,31 @@
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="TaxCode" Type="nchar" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLMEDIA.dbo.Classify' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Classify">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="KindOfVideo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLMEDIA.dbo.Listclassify_Media' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Listclassify_Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMedia" Type="int" />
+          <Property Name="IdClassify" Type="int" />
         </EntityType>
         <EntityType Name="ListMediaLike">
           <Key>
@@ -95,6 +114,16 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Age" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityContainer Name="QLMEDIAModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KindOfVideo" EntityType="Self.KindOfVideo" Schema="dbo" store:Type="Tables" />
@@ -104,6 +133,20 @@
           <EntitySet Name="MyPlayList" EntityType="Self.MyPlayList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentHistory" EntityType="Self.PaymentHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classify" EntityType="Self.Classify" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Classify].[Id] AS [Id], 
+    [Classify].[Name] AS [Name]
+    FROM [dbo].[Classify] AS [Classify]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Listclassify_Media" EntityType="Self.Listclassify_Media" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Listclassify_Media].[Id] AS [Id], 
+    [Listclassify_Media].[IdMedia] AS [IdMedia], 
+    [Listclassify_Media].[IdClassify] AS [IdClassify]
+    FROM [dbo].[Listclassify_Media] AS [Listclassify_Media]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -200,6 +243,31 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Age" Type="Int32" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Classify">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Listclassify_Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMedia" Type="Int32" />
+          <Property Name="IdClassify" Type="Int32" />
+        </EntityType>
         <EntityContainer Name="QLMEDIAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="KindOfVideos" EntityType="Self.KindOfVideo" />
@@ -209,6 +277,9 @@
           <EntitySet Name="MyPlayLists" EntityType="Self.MyPlayList" />
           <EntitySet Name="PaymentHistories" EntityType="Self.PaymentHistory" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Classifies" EntityType="Self.Classify" />
+          <EntitySet Name="Listclassify_Media" EntityType="Self.Listclassify_Media" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -305,6 +376,34 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QLMEDIAModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classifies">
+            <EntityTypeMapping TypeName="QLMEDIAModel.Classify">
+              <MappingFragment StoreEntitySet="Classify">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Listclassify_Media">
+            <EntityTypeMapping TypeName="QLMEDIAModel.Listclassify_Media">
+              <MappingFragment StoreEntitySet="Listclassify_Media">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+                <ScalarProperty Name="IdClassify" ColumnName="IdClassify" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
