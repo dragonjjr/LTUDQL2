@@ -12,7 +12,7 @@ namespace ResourceDA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Profile
+    public partial class Profile : INotifyPropertyChanged
     {
         public int IdAccount { get; set; }
         public int Id { get; set; }
