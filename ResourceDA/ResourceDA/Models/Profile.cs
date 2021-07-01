@@ -18,23 +18,8 @@ namespace ResourceDA.Models
     {
         string _Name;
         int _IdAccount, _Age;
-        public int Id { get; set; }
-        public string Name
-        {
-            get => _Name; 
-            set
-            {
-                if (_Name != value)
-                {
-                    _Name = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public int IdAccount
-        {
-            get => _IdAccount; 
+        public int IdAccount {
+            get => _IdAccount;
             set
             {
                 if (_IdAccount != value)
@@ -44,10 +29,20 @@ namespace ResourceDA.Models
                 }
             }
         }
-
-        public Nullable<int> Age
-        {
-            get => _Age; 
+        public int Id { get; set; }
+        public string Name {
+            get => _Name;
+            set
+            {
+                if (_Name != value)
+                {
+                    _Name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public Nullable<int> Age {
+            get => _Age;
             set
             {
                 if (_Age != value && value != null)
