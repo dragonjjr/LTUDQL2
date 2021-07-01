@@ -40,19 +40,19 @@ namespace ResourceDA.ViewModels.User
 
         public ListCollectionView DSProfile
         {
-            get => (ListCollectionView)GetValue(DsProfileProperty); 
-            set => SetValue(DsProfileProperty, value); 
+            get => (ListCollectionView)GetValue(DsProfileProperty);
+            set => SetValue(DsProfileProperty, value);
         }
 
         public Profile Profile
         {
-            get => (Profile)GetValue(ProfileProperty); 
-            set => SetValue(ProfileProperty, value); 
+            get => (Profile)GetValue(ProfileProperty);
+            set => SetValue(ProfileProperty, value);
         }
         public Profile ProfileNew
         {
-            get => (Profile)GetValue(ProflieNewProperty); 
-            set => SetValue(ProflieNewProperty, value); 
+            get => (Profile)GetValue(ProflieNewProperty);
+            set => SetValue(ProflieNewProperty, value);
         }
 
         public ProfileViewVM()
@@ -60,29 +60,30 @@ namespace ResourceDA.ViewModels.User
             CmdUpdateProfile = new RelayCommand<object>(UpdateProfile);
             CmdDeleteProfile = new RelayCommand<object>(DeleteProfile);
             CmdAddProfile = new RelayCommand<object>(AddProfile);
-           
 
-            using (QLMEDIAEntities1 qLMEDIA = new QLMEDIAEntities1())
+
+            using (QLMEDIAEntities qLMEDIA = new QLMEDIAEntities())
             {
+                DSProfile = new ListCollectionView(qLMEDIA.Profiles.ToList());
+
                 DSProfile.CurrentChanged += (obj, e) =>
                 {
                     var profileCur = DSProfile.CurrentItem as Profile;
                     Profile = new Profile
                     {
-                        Id = profileCur.Id,
-                        IdAccount = profileCur.IdAccount,
+                        Id =profileCur.Id,
+                        IdAccount = 1,
                         Name = profileCur.Name,
                         Age = profileCur.Age
                     };
                 };
             }
-
-            ProfileNew = new Profile();
+            ProfileNew = new Profile() { Id=1};
         }
 
         void UpdateProfile(object obj)
         {
-            using (var qLMEDIA = new QLMEDIAEntities1())
+            using (var qLMEDIA = new QLMEDIAEntities())
             {
                 var profileUpdate = qLMEDIA.Profiles.Single(prof => prof.Id == Profile.Id);
                 profileUpdate.IdAccount = Profile.IdAccount;
@@ -102,7 +103,7 @@ namespace ResourceDA.ViewModels.User
 
         void DeleteProfile(object obj)
         {
-            using (var qLMEDIA = new QLMEDIAEntities1())
+            using (var qLMEDIA = new QLMEDIAEntities())
             {
                 var profileDel = qLMEDIA.Profiles.FirstOrDefault(prof => prof.Id == Profile.Id);
                 qLMEDIA.Profiles.Remove(profileDel);
@@ -122,19 +123,26 @@ namespace ResourceDA.ViewModels.User
 
         void AddProfile(object obj)
         {
-
-            using (var qLMEDIA = new QLMEDIAEntities1())
+            try
             {
-                qLMEDIA.Profiles.Add(ProfileNew);
-                qLMEDIA.SaveChanges();
+                using (var qLMEDIA = new QLMEDIAEntities())
+                {
+                    qLMEDIA.Profiles.Add(ProfileNew);
+                    qLMEDIA.SaveChanges();
 
-                DSProfile.AddNewItem(ProfileNew);
-                DSProfile.CommitNew();
-                MessTimeout w = new MessTimeout("Add success :" + ProfileNew.IdAccount, 2000);
-                w.ShowDialog();
-                ProfileNew = new Profile();
+                    DSProfile.AddNewItem(ProfileNew);
+                    DSProfile.CommitNew();
+                    MessTimeout w = new MessTimeout("Add success :" + ProfileNew.IdAccount, 2000);
+                    w.ShowDialog();
 
+                }
             }
+            catch
+            {
+                MessTimeout w = new MessTimeout("Error", 2000);
+                w.ShowDialog();
+            }
+           
         }
     }
 }
