@@ -17,9 +17,9 @@ namespace ResourceDA.Models
     public partial class Medium : INotifyPropertyChanged
     {
         string _Describe, _Time, _Directors, _Source, _Actor, _Name, _Poster;
-        int _Likes, _Genre;
-        double _IMDB;
-        System.DateTime _PostedDate;
+        int? _Likes, _Genre;
+        double? _IMDB;
+        System.DateTime? _PostedDate;
         public string Describe
         {
             get => _Describe;
@@ -74,9 +74,9 @@ namespace ResourceDA.Models
             get => _PostedDate;
             set
             {
-                if (_PostedDate != value && value != null)
+                if (_PostedDate != value )
                 {
-                    _PostedDate = (System.DateTime)value;
+                    _PostedDate = value;
                     OnPropertyChanged();
                 }
             }
@@ -98,7 +98,7 @@ namespace ResourceDA.Models
             get => _IMDB;
             set
             {
-                if (_IMDB != value && value != null)
+                if (_IMDB != value )
                 {
                     _IMDB = (double)value;
                     OnPropertyChanged();
@@ -110,7 +110,7 @@ namespace ResourceDA.Models
             get => _Likes;
             set
             {
-                if (_Likes != value && value != null)
+                if (_Likes != value )
                 {
                     _Likes = (int)value;
                     OnPropertyChanged();
@@ -122,9 +122,9 @@ namespace ResourceDA.Models
             get => _Genre;
             set
             {
-                if (_Genre != value && value != null)
+                if (_Genre != value )
                 {
-                    _Genre = (int)value;
+                    _Genre = value;
                     OnPropertyChanged();
                 }
             }

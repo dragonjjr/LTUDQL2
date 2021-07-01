@@ -18,6 +18,7 @@ namespace ResourceDA.ViewModels.Admin
     class AccountsViewVM : DependencyObject, INotifyPropertyChanged
     {
         public static readonly DependencyProperty DsAccountProperty;
+        public static readonly DependencyProperty DsAccountPaymentHistory;
         public static readonly DependencyProperty AccountProperty;
         public static readonly DependencyProperty AccountNewProperty;
 
@@ -68,6 +69,11 @@ namespace ResourceDA.ViewModels.Admin
                             CreditCardNumber = accountCur.CreditCardNumber,
                             TaxCode = accountCur.TaxCode
                         };
+
+                        using (QLMEDIAEntities qLMEDIA1 = new QLMEDIAEntities())
+                        {
+                            dsAccountPaymentHistory = new ListCollectionView(qLMEDIA1.PaymentHistories.Where(pay => pay.IdAccount == accountCur.Id).ToList());
+                        }
                     };
                 }
 
@@ -86,6 +92,7 @@ namespace ResourceDA.ViewModels.Admin
         static AccountsViewVM()
         {
             DsAccountProperty = DependencyProperty.Register("DSAccount", typeof(ListCollectionView), typeof(AccountsViewVM));
+            DsAccountPaymentHistory = DependencyProperty.Register("dsAccountPaymentHistory", typeof(ListCollectionView), typeof(AccountsViewVM));
             AccountProperty = DependencyProperty.Register("Account", typeof(Account), typeof(AccountsViewVM));
             AccountNewProperty = DependencyProperty.Register("AccountNew", typeof(Account), typeof(AccountsViewVM));
         }
@@ -94,6 +101,11 @@ namespace ResourceDA.ViewModels.Admin
         {
             get => (ListCollectionView)GetValue(DsAccountProperty);
             set => SetValue(DsAccountProperty, value);
+        }
+        public ListCollectionView dsAccountPaymentHistory
+        {
+            get => (ListCollectionView)GetValue(DsAccountPaymentHistory);
+            set => SetValue(DsAccountPaymentHistory, value);
         }
 
         public Account Account
@@ -133,6 +145,11 @@ namespace ResourceDA.ViewModels.Admin
                         CreditCardNumber= accountCur.CreditCardNumber,
                         TaxCode = accountCur.TaxCode
                     };
+
+                    using (QLMEDIAEntities qLMEDIA1 = new QLMEDIAEntities())
+                    {
+                        dsAccountPaymentHistory = new ListCollectionView(qLMEDIA1.PaymentHistories.Where(pay => pay.IdAccount == accountCur.Id).ToList());
+                    }
                 };
             }
 
@@ -159,6 +176,13 @@ namespace ResourceDA.ViewModels.Admin
                         CreditCardNumber = accountCur.CreditCardNumber,
                         TaxCode = accountCur.TaxCode
                     };
+
+                    // load AccountPaymentHistory
+
+                    using (QLMEDIAEntities qLMEDIA1 = new QLMEDIAEntities())
+                    {
+                        dsAccountPaymentHistory = new ListCollectionView(qLMEDIA1.PaymentHistories.Where(pay => pay.IdAccount == accountCur.Id).ToList());
+                    }
                 };
             }
         }
@@ -183,6 +207,13 @@ namespace ResourceDA.ViewModels.Admin
                         CreditCardNumber = accountCur.CreditCardNumber,
                         TaxCode = accountCur.TaxCode
                     };
+
+                    // load AccountPaymentHistory
+
+                    using (QLMEDIAEntities qLMEDIA1 = new QLMEDIAEntities())
+                    {
+                        dsAccountPaymentHistory = new ListCollectionView(qLMEDIA1.PaymentHistories.Where(pay => pay.IdAccount == accountCur.Id).ToList());
+                    }
                 };
             }
         }
@@ -199,6 +230,7 @@ namespace ResourceDA.ViewModels.Admin
                 accountUpdate.LevelAccount = Account.LevelAccount;
                 accountUpdate.CreditCardNumber = Account.CreditCardNumber;
                 accountUpdate.TaxCode = Account.TaxCode;
+                accountUpdate.Address = Account.Address;
                 qLMEDIA.SaveChanges();
 
                 var accountCur = DSAccount.CurrentItem as Account;
@@ -209,6 +241,7 @@ namespace ResourceDA.ViewModels.Admin
                 accountCur.LevelAccount = Account.LevelAccount;
                 accountCur.CreditCardNumber = Account.CreditCardNumber;
                 accountCur.TaxCode = Account.TaxCode;
+                accountCur.Address = Account.Address;
 
                 MessTimeout w = new MessTimeout("Update success ! " , 2000);
                 w.ShowDialog();
@@ -217,22 +250,66 @@ namespace ResourceDA.ViewModels.Admin
 
         void DeleteAccount(object obj)
         {
-            using (var qLMEDIA = new QLMEDIAEntities())
+            if (MessageBox.Show("Are you sure delete Account this ?", "Delete Account", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                var accountDel = qLMEDIA.Accounts.FirstOrDefault(acc => acc.Id == Account.Id);
-                qLMEDIA.Accounts.Remove(accountDel);
-                qLMEDIA.SaveChanges();
+                using (var qLMEDIA = new QLMEDIAEntities())
+                {
+                    // xoa bang ListMediaLikes
+                    while (qLMEDIA.ListMediaLikes.FirstOrDefault(medi => medi.IdAccount == Account.Id) != null)
+                    {
+                        var mediDel = qLMEDIA.ListMediaLikes.FirstOrDefault(medi => medi.IdAccount == Account.Id);
+                        qLMEDIA.ListMediaLikes.Remove(mediDel);
+                        qLMEDIA.SaveChanges();
+                    }
 
-                int index = DSAccount.IndexOf(DSAccount.CurrentItem);
-                DSAccount.MoveCurrentToFirst();
-                DSAccount.CancelEdit();
-                DSAccount.RemoveAt(index);
+                    // xoa bang MyPlayLists
+                    while (qLMEDIA.MyPlayLists.FirstOrDefault(medi => medi.IdAccount == Account.Id) != null)
+                    {
+                        var mediDel = qLMEDIA.MyPlayLists.FirstOrDefault(medi => medi.IdAccount == Account.Id);
+                        qLMEDIA.MyPlayLists.Remove(mediDel);
+                        qLMEDIA.SaveChanges();
+                    }
 
-                // MessageBox.Show("delete succ" + accountDel.UserName);
+                    // xoa bang ListMediaLikes
+                    while (qLMEDIA.ListMediaViews.FirstOrDefault(medi => medi.IdAccount == Account.Id) != null)
+                    {
+                        var mediDel = qLMEDIA.ListMediaViews.FirstOrDefault(medi => medi.IdAccount == Account.Id);
+                        qLMEDIA.ListMediaViews.Remove(mediDel);
+                        qLMEDIA.SaveChanges();
+                    }
 
-                MessTimeout w = new MessTimeout("Delete success :" + accountDel.UserName, 2000);
-                w.ShowDialog();
+                    // xoa bang PaymentHistories
+                    while (qLMEDIA.PaymentHistories.FirstOrDefault(medi => medi.IdAccount == Account.Id) != null)
+                    {
+                        var mediDel = qLMEDIA.PaymentHistories.FirstOrDefault(medi => medi.IdAccount == Account.Id);
+                        qLMEDIA.PaymentHistories.Remove(mediDel);
+                        qLMEDIA.SaveChanges();
+                    }
 
+                    // xoa bang PaymentHistories
+                    while (qLMEDIA.Profiles.FirstOrDefault(medi => medi.IdAccount == Account.Id) != null)
+                    {
+                        var mediDel = qLMEDIA.Profiles.FirstOrDefault(medi => medi.IdAccount == Account.Id);
+                        qLMEDIA.Profiles.Remove(mediDel);
+                        qLMEDIA.SaveChanges();
+                    }
+
+                    // xoa bang account
+                    var accountDel = qLMEDIA.Accounts.FirstOrDefault(acc => acc.Id == Account.Id);
+                    qLMEDIA.Accounts.Remove(accountDel);
+                    qLMEDIA.SaveChanges();
+
+                    int index = DSAccount.IndexOf(DSAccount.CurrentItem);
+                    DSAccount.MoveCurrentToFirst();
+                    DSAccount.CancelEdit();
+                    DSAccount.RemoveAt(index);
+
+                    // MessageBox.Show("delete succ" + accountDel.UserName);
+
+                    MessTimeout w = new MessTimeout("Delete success :" + accountDel.UserName, 2000);
+                    w.ShowDialog();
+
+                }
             }
         }
 

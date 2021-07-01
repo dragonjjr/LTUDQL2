@@ -5,10 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceDA.Views.Admin"
         mc:Ignorable="d"
-        Title="DashboardView" Height="200" Width="400">
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-        <Button Width="auto" Height="100" Margin="20"  Command="{Binding CmdManageAccounts}">Quản lý Tài khoản</Button>
-        <Button Width="auto" Height="100" Margin="20"  Command="{Binding CmdMediaManage}">Quản lý media</Button>
-        <Button Width="auto" Height="100" Margin="20"  Command="{Binding CmdStatisticalChartMedia}">Thống kê</Button>
-    </StackPanel>
+        Title="DashboardView" Height="275.083" Width="1073.26"
+        ResizeMode="NoResize"
+        >
+    
+
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#F30505"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#231D1D"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Ds các chức năng Admin" FontSize="20" />
+            <TextBlock Text="Thêm, xóa, sửa tài khoảng" />
+            <TextBlock Text="xem lịch sử thanh toán của tài khoảng" />
+            <TextBlock Text="Thêm, xóa, sửa Media" />
+            <TextBlock Text="Import video" />
+            <TextBlock Text="Thêm, xóa, sửa thể loại" />
+            <TextBlock Text="Thêm, xóa video của thể loại" />
+            <TextBlock Text="Thống kê doanh thu" />
+            <TextBlock Text="Thống kê lượt yêu thích" />
+            <TextBlock Text="Thống kê lượt xem" />
+        </StackPanel>
+        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="auto" Height="100" Margin="5"  Command="{Binding CmdManageAccounts}">Quản lý Tài khoản</Button>
+                <Button Width="auto" Height="100" Margin="5"  Command="{Binding CmdMediaManage}">Quản lý media</Button>
+                <Button Width="auto" Height="100" Margin="5"  Command="{Binding CmdKindofMedia}">Quản lý Kind of Media</Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="auto" Height="100" Margin="5"  Command="{Binding CmdStatisticalChartMedia}">Thống kê lượt yêu thích media</Button>
+                <Button Width="auto" Height="100" Margin="5"  Command="{Binding CmdStatisticalChartMediaByRevenue}">Thống kê doanh thu media</Button>
+                <Button Width="auto" Height="100" Margin="5"  Command="{Binding CmdMediaCountstatisticsView}">Thống kê lượt xem media</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+        
 </Window>

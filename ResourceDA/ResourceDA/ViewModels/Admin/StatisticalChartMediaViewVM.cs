@@ -47,7 +47,7 @@ namespace ResourceDA.ViewModels.Admin
         {
             seriesCollectionProperty = DependencyProperty.Register("seriesCollection", typeof(SeriesCollection), typeof(StatisticalChartMediaViewVM));
             LabelsProperty = DependencyProperty.Register("Labels", typeof(string[]), typeof(StatisticalChartMediaViewVM));
-            DsKindOfMediaProperty = DependencyProperty.Register("DsKindOfMediaa", typeof(ListCollectionView), typeof(MediaManageViewVM));
+            DsKindOfMediaProperty = DependencyProperty.Register("DsKindOfMediaa", typeof(ListCollectionView), typeof(StatisticalChartMediaViewVM));
             // FormatterProperty = DependencyProperty.Register("Formatter", typeof(Func<double, string>), typeof(StatisticalChartMediaViewVM));
         }
 
@@ -308,12 +308,12 @@ namespace ResourceDA.ViewModels.Admin
                     new ColumnSeries
                     {
                         Title = "Like",
-                        Values = new ChartValues<int>(arrLikes)
+                        Values = new ChartValues<int>(arrLikes),
+                        Fill = System.Windows.Media.Brushes.DarkRed
                     }
                 };
 
             Labels = arrName;
-            // Formatter = value => value.ToString();
         }
 
         public ListCollectionView DsKindOfMediaa

@@ -11,7 +11,9 @@ namespace ResourceDA.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
     public partial class Profile : INotifyPropertyChanged
     {
         string _Name;

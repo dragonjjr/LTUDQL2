@@ -164,7 +164,7 @@ namespace ResourceDA.ViewModels.Admin
 
             try
             {
-                    using (QLMEDIAEntities qLMEDIA = new QLMEDIAEntities())
+                using (QLMEDIAEntities qLMEDIA = new QLMEDIAEntities())
                 {
                     DsKindOfMedia = new ListCollectionView(qLMEDIA.KindOfVideos.ToList());
                     DSKindOfVideoAdd = new ListCollectionView(qLMEDIA.KindOfVideos.ToList());
@@ -329,12 +329,14 @@ namespace ResourceDA.ViewModels.Admin
                     MediaUpdate.Time = Media.Time;
                     MediaUpdate.Name = Media.Name;
                     MediaUpdate.Directors = Media.Directors;
-                    MediaUpdate.Source =  Media.Source.Substring(Media.Source.LastIndexOf(@"\") + 1);
+                    if (String.IsNullOrEmpty(Media.Source))
+                        MediaUpdate.Source =  Media.Source.Substring(Media.Source.LastIndexOf(@"\") + 1);
                     MediaUpdate.PostedDate = Media.PostedDate;
                     MediaUpdate.Actor = Media.Actor;
                     MediaUpdate.Genre = Media.Genre;
                     MediaUpdate.IMDB = Media.IMDB;
-                    MediaUpdate.Poster = Media.Poster.Substring(Media.Poster.LastIndexOf(@"\") +1 );
+                    if (String.IsNullOrEmpty(Media.Poster))
+                        MediaUpdate.Poster = Media.Poster.Substring(Media.Poster.LastIndexOf(@"\") +1 );
                     //try
                     //{
                     //    qLMEDIA.SaveChanges();
@@ -356,12 +358,14 @@ namespace ResourceDA.ViewModels.Admin
                     MediaCur.Time = Media.Time;
                     MediaCur.Name = Media.Name;
                     MediaCur.Directors = Media.Directors;
-                    MediaUpdate.Source = Media.Source.Substring(Media.Source.LastIndexOf(@"\") +1);
+                    if (String.IsNullOrEmpty(Media.Source))
+                        MediaUpdate.Source = Media.Source.Substring(Media.Source.LastIndexOf(@"\") +1);
                     MediaCur.PostedDate = Media.PostedDate;
                     MediaCur.Actor = Media.Actor;
                     MediaUpdate.Genre = Media.Genre;
                     MediaUpdate.IMDB = Media.IMDB;
-                    MediaUpdate.Poster = Media.Poster.Substring(Media.Poster.LastIndexOf(@"\") +1);
+                    if (String.IsNullOrEmpty(Media.Poster))
+                        MediaUpdate.Poster = Media.Poster.Substring(Media.Poster.LastIndexOf(@"\") +1);
 
                     MessTimeout w = new MessTimeout("Update success ! ", 1000);
                     w.ShowDialog();
@@ -376,30 +380,69 @@ namespace ResourceDA.ViewModels.Admin
 
         void DeleteMedia(object obj)
         {
-            try
+            if (MessageBox.Show("Are you sure delete Media this ?", "Delete Media", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                    using (var qLMEDIA = new QLMEDIAEntities())
+                try
                 {
-                    var MediaDel = qLMEDIA.Media.FirstOrDefault(medi => medi.Id == Media.Id);
-                    qLMEDIA.Media.Remove(MediaDel);
-                    qLMEDIA.SaveChanges();
+                    using (var qLMEDIA = new QLMEDIAEntities())
+                    {
+                        // xoa bang Listclassify_Media
+                        while (qLMEDIA.Listclassify_Media.FirstOrDefault(medi => medi.IdMedia == Media.Id) != null)
+                        {
+                            var mediDel = qLMEDIA.Listclassify_Media.FirstOrDefault(medi => medi.IdMedia == Media.Id);
+                            qLMEDIA.Listclassify_Media.Remove(mediDel);
+                            qLMEDIA.SaveChanges();
+                        }
 
-                    int index = DSMedia.IndexOf(DSMedia.CurrentItem);
-                    DSMedia.MoveCurrentToFirst();
-                    DSMedia.CancelEdit();
-                    DSMedia.RemoveAt(index);
+                        // xoa bang ListMediaLikes
+                        while (qLMEDIA.ListMediaLikes.FirstOrDefault(medi => medi.IdMedia == Media.Id) != null)
+                        {
+                            var mediDel = qLMEDIA.ListMediaLikes.FirstOrDefault(medi => medi.IdMedia == Media.Id);
+                            qLMEDIA.ListMediaLikes.Remove(mediDel);
+                            qLMEDIA.SaveChanges();
+                        }
 
-                    // MessageBox.Show("delete succ" + MediaDel.UserName);
+                        // xoa bang ListMediaViews
+                        while (qLMEDIA.ListMediaViews.FirstOrDefault(medi => medi.IdMedia == Media.Id) != null)
+                        {
+                            var mediDel = qLMEDIA.ListMediaViews.FirstOrDefault(medi => medi.IdMedia == Media.Id);
+                            qLMEDIA.ListMediaViews.Remove(mediDel);
+                            qLMEDIA.SaveChanges();
+                        }
 
-                    MessTimeout w = new MessTimeout("Delete success :" + MediaDel.Name, 1000);
-                    w.ShowDialog();
+                        // xoa bang MyPlayLists
+                        while (qLMEDIA.MyPlayLists.FirstOrDefault(medi => medi.IdMedia == Media.Id) != null)
+                        {
+                            var mediDel = qLMEDIA.MyPlayLists.FirstOrDefault(medi => medi.IdMedia == Media.Id);
+                            qLMEDIA.MyPlayLists.Remove(mediDel);
+                            qLMEDIA.SaveChanges();
+                        }
 
+                        var MediaDel = qLMEDIA.Media.FirstOrDefault(medi => medi.Id == Media.Id);
+                        qLMEDIA.Media.Remove(MediaDel);
+
+
+                        File.Delete(Media.Source);//Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Assets\video\" + Media.Source);
+                        if (String.IsNullOrEmpty(Media.Poster))
+                            File.Delete(Media.Poster); //Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Assets\image\poster\" + Media.Poster);
+
+                        qLMEDIA.SaveChanges();
+
+                        int index = DSMedia.IndexOf(DSMedia.CurrentItem);
+                        DSMedia.MoveCurrentToFirst();
+                        DSMedia.CancelEdit();
+                        DSMedia.RemoveAt(index);
+
+                        MessTimeout w = new MessTimeout("Delete success :" + MediaDel.Name, 1000);
+                        w.ShowDialog();
+
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessTimeout w = new MessTimeout(ex.Message, 3000);
-                w.ShowDialog();
+                catch (Exception ex)
+                {
+                    MessTimeout w = new MessTimeout(ex.Message, 3000);
+                    w.ShowDialog();
+                }
             }
         }
 
@@ -411,8 +454,10 @@ namespace ResourceDA.ViewModels.Admin
                 using (var qLMEDIA = new QLMEDIAEntities())
                 {
                     MediaNew.Genre = KindOfVideoAddCur.Id;
-                    MediaNew.Poster = MediaNew.Poster.Substring(MediaNew.Poster.LastIndexOf(@"\") + 1);
-                    MediaNew.Source = MediaNew.Source.Substring(MediaNew.Source.LastIndexOf(@"\") + 1);
+                    if(MediaNew.Poster != null)
+                        MediaNew.Poster = MediaNew.Poster.Substring(MediaNew.Poster.LastIndexOf(@"\") + 1);
+                    if (MediaNew.Source != null)
+                        MediaNew.Source = MediaNew.Source.Substring(MediaNew.Source.LastIndexOf(@"\") + 1);
 
                     qLMEDIA.Media.Add(MediaNew);
                     qLMEDIA.SaveChanges();

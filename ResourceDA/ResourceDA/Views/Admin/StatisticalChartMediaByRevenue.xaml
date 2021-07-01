@@ -1,11 +1,12 @@
-﻿<Window x:Class="ResourceDA.Views.Admin.AccountsView"
+﻿<Window x:Class="ResourceDA.Views.Admin.StatisticalChartMediaByRevenue"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ResourceDA.Views.Admin"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="AccountsView" WindowState="Maximized" ResizeMode="CanMinimize" >
+        Title="StatisticalChartMediaByRevenue" WindowState="Maximized" ResizeMode="CanMinimize">
 
     <Window.Resources>
 
@@ -520,12 +521,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListView">
                         <Border Name="Border"
-                BorderThickness="4">
+                BorderThickness="1">
                             <Border.Background>
-                                <SolidColorBrush Color="#7A5C5C" />
+                                <SolidColorBrush Color="#555555" />
                             </Border.Background>
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="#DB1111" />
+                                <SolidColorBrush Color="Aquamarine" />
                             </Border.BorderBrush>
                             <ScrollViewer Style="{DynamicResource
                         {x:Static GridView.GridViewScrollViewerStyleKey}}">
@@ -695,191 +696,52 @@
 
     </Window.Resources>
 
-    <StackPanel>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Height="50"
-                 FontSize="30"   Text="Management Account"/>
-    
-        <Grid>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50"
+                 FontSize="30"   Text="Media revenue statistics"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*" />
+            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Criteria" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-                    <Separator Width="30" Background="Transparent"/>
-                    <DockPanel>
-                        <ToolBarTray DockPanel.Dock="Top">
-                            <ToolBar>
-                                <Button Margin="0,0,30,0" Content="None" Command="{Binding CmdCriteriaAccountNone}"  />
-                                <Button Margin="0,0,0,0"  Content="Level Account" />
-                                <!--<ComboBox Command="{Binding CmdCriteriaAccountLevelAccount}">
-                                    <ComboBoxItem IsSelected="True">Level 1</ComboBoxItem>
-                                    <ComboBoxItem>Level 2</ComboBoxItem>
-                                    <ComboBoxItem>Level 3</ComboBoxItem>
-                                </ComboBox>-->
-                                <ComboBox Style="{StaticResource  ComboBoxate}" ItemsSource="{Binding Values}"
-                                          SelectedItem="{Binding SelectedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Criteria" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
+                <Separator Width="30" Background="Transparent"/>
+                <DockPanel>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar>
+                            <Button Margin="0,0,30,0" Content="Year : " />
+                            <ComboBox Style="{StaticResource  ComboBoxate}" ItemsSource="{Binding ValuesYear}"
+                                          SelectedItem="{Binding SelectedValueYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           Height="25" Width="100"
                                           />
+                            <Button Margin="0,0,30,0" Content="Month : " />
+                            <ComboBox Style="{StaticResource  ComboBoxate}"  ItemsSource="{Binding ValuesMonth}"
+                                          SelectedItem="{Binding SelectedValueMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Height="25" Width="100"
+                            />
 
-                                <Button Margin="0,0,30,0" Content=".." />
-                            </ToolBar>
-                        </ToolBarTray>
-                    </DockPanel>
-                </StackPanel>
-
-                <ListView Name="lvAccount"  ItemsSource="{Binding DSAccount, Mode=TwoWay}"
-                              SelectionMode="Single" IsSynchronizedWithCurrentItem="True" Height="300" Width="auto"
-                              >
-
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="ToolTip">
-                                <Setter.Value>
-                                    <UniformGrid Columns="1">
-                                        <TextBlock >
-                                                <Run Text="UserName: "/>
-                                                <Run Text="{Binding UserName}"/>
-                                        </TextBlock>
-                                        <!--<TextBlock Text="{Binding Image}"/>-->
-                                        <!--<Image Source="{Binding Image}" >
-                                        </Image>-->
-                                        <TextBlock >
-                                                <Run Text="Address: "/>
-                                                <Run Text="{Binding Address}"/>
-                                        </TextBlock>
-                                        <TextBlock >
-                                                <Run Text="Password: "/>
-                                                <Run Text="{Binding Password}"/>
-                                        </TextBlock>
-                                        <TextBlock >
-                                                <Run Text="LevelAccount: "/>
-                                                <Run Text="{Binding LevelAccount}"/>
-                                        </TextBlock>
-                                        <TextBlock >
-                                                <Run Text="PhoneNumber: "/>
-                                                <Run Text="{Binding PhoneNumber}"/>
-                                        </TextBlock>
-
-                                        <TextBlock >
-                                                <Run Text="CreditCardNumber: "/>
-                                                <Run Text="{Binding CreditCardNumber}"/>
-                                        </TextBlock>
-                                        <TextBlock Text="{Binding CreditCardNumber}"/>
-                                        <TextBlock >
-                                                <Run Text="TaxCode: "/>
-                                                <Run Text="{Binding TaxCode}"/>
-                                        </TextBlock>
-                                    </UniformGrid>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding Path=UserName}" />
-                            <!--<GridViewColumn Header="Image" Width="200" DisplayMemberBinding="{Binding Path=Image}" />-->
-                            <GridViewColumn Header="PhoneNumber" Width="Auto" DisplayMemberBinding="{Binding Path=PhoneNumber}" />
-                            <GridViewColumn Header="Address" Width="Auto" DisplayMemberBinding="{Binding Path=Address}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Height="30"
-                 FontSize="20"   Text="Payment history"/>
-
-                <ListView Name="lvAccountPaymentHistory"  ItemsSource="{Binding dsAccountPaymentHistory, Mode=TwoWay}"
-                              SelectionMode="Single" IsSynchronizedWithCurrentItem="True" Height="300" Width="auto"
-                              >
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn Header="Date Payment" Width="Auto" DisplayMemberBinding="{Binding Path=Date}" />
-                            <GridViewColumn Header="Money Paymen " Width="Auto" DisplayMemberBinding="{Binding Path=Money}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-
+                        </ToolBar>
+                    </ToolBarTray>
+                </DockPanel>
             </StackPanel>
 
-            <StackPanel Margin="2" Grid.Column="1" HorizontalAlignment="Center">
-                <TabControl Width="Auto">
-                    <TabItem Header="Update or Delete account">
-                        <StackPanel>
-                            <TextBlock > User Name:</TextBlock>
-                            <TextBox Text="{Binding Account.UserName}" Margin="3" Width="auto"/>
-                            <TextBlock > Password :</TextBlock>
-                            <TextBox Text="{Binding Account.Password}" Margin="3" Width="auto"/>
-                            <TextBlock > LevelAccount :</TextBlock>
-                            <TextBox Text="{Binding Account.LevelAccount}" Margin="3" Width="auto"/>
-                            <TextBlock > CreditCardNumber :</TextBlock>
-                            <TextBox Text="{Binding Account.CreditCardNumber}" Margin="3" Width="auto"/>
-                            <TextBlock > TaxCode :</TextBlock>
-                            <TextBox Text="{Binding Account.TaxCode}" Margin="3" Width="auto"/>
-                            <!--<TextBlock >Image:</TextBlock>
-                -->
-                            <!--<TextBox Text="{Binding Account.Image}" Margin="3" Width="200"/>-->
-                            <!--
-                <Image Source="{Binding Account.Image}" ></Image>-->
-                            <TextBlock >PhoneNumber:</TextBlock>
-                            <TextBox Text="{Binding Account.PhoneNumber}" Margin="3" Width="auto"/>
-                            <TextBlock >Address :</TextBlock>
-                            <TextBox Text="{Binding Account.Address}" Margin="3" Width="auto"
-                            TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
-                            <WrapPanel HorizontalAlignment="Center">
-                                <Button Margin="10" Width="50" Command="{Binding CmdUpdateAccount}" >Update</Button>
-                                <Button Margin="10" Width="50" Command="{Binding CmdDeleteAccount}">Delete</Button>
-                            </WrapPanel>
-                            <!--<Border BorderThickness="5" Margin="10" Padding="5" >
-                    <StackPanel >
-                        <TextBlock >Chọn lớp cho học sinh:</TextBlock>
-                        <ComboBox Margin="5" Name="cbLopHocAdd" ItemsSource="{Binding DSLopHocAdd}" Width="70" DisplayMemberPath="TenLopHoc" ></ComboBox>
-                        <Button Margin="3" Width="50" Command="{Binding CmdAddHocSinh}">Add</Button>
-                    </StackPanel>
-                </Border>-->
-                        </StackPanel>
-                    </TabItem>
-                    <TabItem Header="Add Account">
-                        <StackPanel>
-                            <TextBlock > User Name:</TextBlock>
-                            <TextBox Text="{Binding AccountNew.UserName}" Margin="3" Width="auto"/>
-                            <TextBlock > Password :</TextBlock>
-                            <TextBox Text="{Binding AccountNew.Password}" Margin="3" Width="auto"/>
-                            <TextBlock > LevelAccount :</TextBlock>
-                            <TextBox Text="{Binding AccountNew.LevelAccount}" Margin="3" Width="auto"/>
-                            <TextBlock > CreditCardNumber :</TextBlock>
-                            <TextBox Text="{Binding AccountNew.CreditCardNumber}" Margin="3" Width="auto"/>
-                            <TextBlock > TaxCode :</TextBlock>
-                            <TextBox Text="{Binding AccountNew.TaxCode}" Margin="3" Width="auto"/>
-                            <!--<TextBlock >Image:</TextBlock>
-                -->
-                            <!--<TextBox Text="{Binding Account.Image}" Margin="3" Width="200"/>-->
-                            <!--
-                <Image Source="{Binding Account.Image}" ></Image>-->
-                            <TextBlock >PhoneNumber:</TextBlock>
-                            <TextBox Text="{Binding AccountNew.PhoneNumber}" Margin="3" Width="auto"/>
-                            <TextBlock >Address :</TextBlock>
-                            <TextBox Text="{Binding AccountNew.Address}" Margin="3" Width="auto"
-                            TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
-                            <WrapPanel HorizontalAlignment="Center">
-                                <Button Margin="10" Width="50" Command="{Binding CmdAddAccount}">Add</Button>
-                            </WrapPanel>
-                            <!--<Border BorderThickness="5" Margin="10" Padding="5" >
-                    <StackPanel >
-                        <TextBlock >Chọn lớp cho học sinh:</TextBlock>
-                        <ComboBox Margin="5" Name="cbLopHocAdd" ItemsSource="{Binding DSLopHocAdd}" Width="70" DisplayMemberPath="TenLopHoc" ></ComboBox>
-                        <Button Margin="3" Width="50" Command="{Binding CmdAddHocSinh}">Add</Button>
-                    </StackPanel>
-                </Border>-->
-                        </StackPanel>
-                    </TabItem>
-                </TabControl>
-            
-            </StackPanel>
+            <lvc:CartesianChart Grid.Row="1" Margin="20" Series="{Binding seriesCollection}" LegendLocation="Right" >
+                <!--<lvc:CartesianChart.AxisY>
+                    --><!-- YFormatter Y-axis coordinate value--><!--
+                    <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>-->
+                <lvc:CartesianChart.AxisX>
+                    <!-- Labels X axis coordinate value-->
+                    <lvc:Axis  Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
         </Grid>
-    </StackPanel>
+
+    </Grid >
 </Window>

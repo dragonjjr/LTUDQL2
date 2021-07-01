@@ -148,7 +148,10 @@
     <Compile Include="ViewModels\Admin\AccountsViewVM.cs" />
     <Compile Include="ViewModels\Admin\DashboardViewVM.cs" />
     <Compile Include="ViewModels\Admin\ImportMediaViewVM.cs" />
+    <Compile Include="ViewModels\Admin\KindOfMediaManageViewVM.cs" />
+    <Compile Include="ViewModels\Admin\MediaCountstatisticsViewVM.cs" />
     <Compile Include="ViewModels\Admin\MediaManageViewVM.cs" />
+    <Compile Include="ViewModels\Admin\StatisticalChartMediaByRevenueVM.cs" />
     <Compile Include="ViewModels\Admin\StatisticalChartMediaViewVM.cs" />
     <Compile Include="Views\Admin\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
@@ -159,11 +162,20 @@
     <Compile Include="Views\Admin\ImportMediaView.xaml.cs">
       <DependentUpon>ImportMediaView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\KindOfMediaManageView.xaml.cs">
+      <DependentUpon>KindOfMediaManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\MediaCountstatisticsView.xaml.cs">
+      <DependentUpon>MediaCountstatisticsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\MediaManageView.xaml.cs">
       <DependentUpon>MediaManageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\StatisticalChartMedia.xaml.cs">
       <DependentUpon>StatisticalChartMedia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\StatisticalChartMediaByRevenue.xaml.cs">
+      <DependentUpon>StatisticalChartMediaByRevenue.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisibilityConverter.cs" />
     <Compile Include="windownsCustom\MessTimeout.xaml.cs">
@@ -197,11 +209,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\KindOfMediaManageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\MediaCountstatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Admin\MediaManageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\StatisticalChartMedia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\StatisticalChartMediaByRevenue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +252,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="MediaInfoDotNet.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

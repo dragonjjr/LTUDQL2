@@ -11,10 +11,30 @@ namespace ResourceDA.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class KindOfVideo
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    public partial class KindOfVideo: INotifyPropertyChanged
     {
+        string _Name;
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name {
+            get => _Name;
+            set
+            {
+                if (_Name != value)
+                {
+                    _Name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

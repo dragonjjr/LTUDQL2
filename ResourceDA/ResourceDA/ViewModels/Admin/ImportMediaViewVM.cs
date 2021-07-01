@@ -22,6 +22,9 @@ namespace ResourceDA.ViewModels.Admin
     {
 
         public static readonly DependencyProperty MediaProperty;
+        public static readonly DependencyProperty BitRateProperty;
+        public static readonly DependencyProperty WidthProperty;
+        public static readonly DependencyProperty HeightProperty;
         public static readonly DependencyProperty DsKindOfVideoAddProperty;
 
         string sourcePostFile ;
@@ -38,6 +41,9 @@ namespace ResourceDA.ViewModels.Admin
         static ImportMediaViewVM()
         {
             MediaProperty = DependencyProperty.Register("Media", typeof(Medium), typeof(ImportMediaViewVM));
+            BitRateProperty = DependencyProperty.Register("BitRateMedia", typeof(String), typeof(ImportMediaViewVM));
+            WidthProperty = DependencyProperty.Register("WidthMedia", typeof(String), typeof(ImportMediaViewVM));
+            HeightProperty = DependencyProperty.Register("HeightMedia", typeof(String), typeof(ImportMediaViewVM));
             DsKindOfVideoAddProperty = DependencyProperty.Register("DSKindOfVideoAdd", typeof(ListCollectionView), typeof(ImportMediaViewVM));
         }
 
@@ -46,6 +52,25 @@ namespace ResourceDA.ViewModels.Admin
             get => (Medium)GetValue(MediaProperty);
             set => SetValue(MediaProperty, value);
         }
+
+        public String BitRateMedia
+        {
+            get => (String)GetValue(BitRateProperty);
+            set => SetValue(BitRateProperty, value);
+        }
+
+        public String WidthMedia
+        {
+            get => (String)GetValue(WidthProperty);
+            set => SetValue(WidthProperty, value);
+        }
+
+        public String HeightMedia
+        {
+            get => (String)GetValue(HeightProperty);
+            set => SetValue(HeightProperty, value);
+        }
+
         public ListCollectionView DSKindOfVideoAdd
         {
             get => (ListCollectionView)GetValue(DsKindOfVideoAddProperty);
@@ -112,6 +137,9 @@ namespace ResourceDA.ViewModels.Admin
                         Media.Genre = KindOfVideoAddCur.Id;
                         //Media.IMDB = Media.IMDB;
                         //Media.Poster = Media.Poster.Substring(Media.Poster.LastIndexOf(@"\") + 1);
+                        BitRateMedia = vid.bitRate.ToString();
+                        WidthMedia = vid.Width.ToString();
+                        HeightMedia = vid.Height.ToString();
                     }
                 }
             }
@@ -150,7 +178,7 @@ namespace ResourceDA.ViewModels.Admin
                         MessTimeout w1 = new MessTimeout(iox.Message, 3000);
                         w1.ShowDialog();
                     }
-
+                    
                     qLMEDIA.Media.Add(Media);
                     qLMEDIA.SaveChanges();
 
@@ -211,6 +239,10 @@ namespace ResourceDA.ViewModels.Admin
                         Media.Genre = KindOfVideoAddCur.Id;
                         //Media.IMDB = Media.IMDB;
                         //Media.Poster = Media.Poster.Substring(Media.Poster.LastIndexOf(@"\") + 1);
+                        BitRateMedia = vid.bitRate.ToString();
+                        WidthMedia = vid.Width.ToString();
+                        HeightMedia = vid.Height.ToString();
+
                     }
                 }
             }

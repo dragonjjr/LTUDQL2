@@ -14,12 +14,36 @@ namespace ResourceDA.ViewModels.Admin
         public ICommand CmdManageAccounts { get; }
         public ICommand CmdMediaManage { get; }
         public ICommand CmdStatisticalChartMedia { get; }
+        public ICommand CmdKindofMedia { get; }
+        public ICommand CmdStatisticalChartMediaByRevenue { get; }
+        public ICommand CmdMediaCountstatisticsView { get; }
 
         public DashboardViewVM()
         {
             CmdManageAccounts = new RelayCommandNoParameter(showManageAccounts);
             CmdMediaManage = new RelayCommandNoParameter(showMediaManage);
             CmdStatisticalChartMedia = new RelayCommandNoParameter(showStatisticalChartMedia);
+            CmdKindofMedia = new RelayCommandNoParameter(showKindofMedia);
+            CmdStatisticalChartMediaByRevenue = new RelayCommandNoParameter(showStatisticalChartMediaByRevenue);
+            CmdMediaCountstatisticsView = new RelayCommandNoParameter(showMediaCountstatisticsView);
+        }
+
+        private void showMediaCountstatisticsView()
+        {
+            MediaCountstatisticsView w = new MediaCountstatisticsView();
+            w.ShowDialog();
+        }
+
+        private void showStatisticalChartMediaByRevenue()
+        {
+            StatisticalChartMediaByRevenue w = new StatisticalChartMediaByRevenue();
+            w.ShowDialog();
+        }
+
+        private void showKindofMedia()
+        {
+            KindOfMediaManageView w = new KindOfMediaManageView();
+            w.ShowDialog();
         }
 
         private void showManageAccounts()
